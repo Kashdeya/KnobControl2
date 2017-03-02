@@ -1,0 +1,60 @@
+package com.kashdeya.knobcontrol.handlers;
+
+public class ItemStackHandler {
+	
+	public static boolean boat = false;
+	public static int boatStack = 64;
+	public static boolean sboat = false;
+	public static int sboatStack = 64;
+	public static boolean bboat = false;
+	public static int bboatStack = 64;
+	public static boolean jboat = false;
+	public static int jboatStack = 64;
+	public static boolean doboat = false;
+	public static int doboatStack = 64;
+	public static boolean aboat = false;
+	public static int aboatStack = 64;
+	public static boolean minecart = false;
+	public static int minecartStack = 64;
+	public static boolean fm = false;
+	public static int fmStack = 64;
+	public static boolean cm = false;
+	public static int cmStack = 64;
+	public static boolean hm = false;
+	public static int hmStack = 64;
+	public static boolean tm = false;
+	public static int tmStack = 64;
+	public static boolean snowball = false;
+	public static int snowballStack = 64;
+	public static boolean egg = false;
+	public static int eggStack = 64;
+	public static boolean pearl = false;
+	public static int pearlStack = 64;
+	public static boolean saddle = false;
+	public static int saddleStack = 64;
+	public static boolean bed = false;
+	public static int bedStack = 64;
+	public static boolean cake = false;
+	public static int cakeStack = 64;
+	public static boolean sign = false;
+	public static int signStack = 64;
+	public static boolean stand = false;
+	public static int standStack = 64;
+	public static boolean bucket = false;
+	public static int bucketStack = 64;
+	public static boolean writable = false;
+	public static int writableStack = 64;
+	public static boolean goldenhorse = false;
+	public static int goldenhorseStack = 64;
+	public static boolean ironhorse = false;
+	public static int ironhorseStack = 64;
+	public static boolean diamondhorse = false;
+	public static int diamondhorseStack = 64;
+	public static boolean stew = false;
+	public static int stewStack = 64;
+	public static boolean rabbit = false;
+	public static int rabbitStack = 64;
+	public static boolean beet = false;
+	public static int beetStack = 64;
+	
+}
