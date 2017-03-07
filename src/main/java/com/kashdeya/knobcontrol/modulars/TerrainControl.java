@@ -16,7 +16,7 @@ import com.kashdeya.knobcontrol.handlers.TerrainControlHandler;
 
 public class TerrainControl {
 	
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void noTerraingen(DecorateBiomeEvent.Decorate event){
 		if (ModularsHandler.terrainControl){
 			EventType type = event.getType();
@@ -105,12 +105,12 @@ public class TerrainControl {
 
 			if((biome == Biomes.PLAINS || biome == Biomes.MUTATED_PLAINS) && event.getType() == EventType.TREE && TerrainControlHandler.plainsTrees) {
 				
-				int amount = (int) Math.max(4, 8);
+				int amount = (int) Math.max(2, 4);
 				for(int i = 0; i < amount; i++) {
 					int x = rand.nextInt(16) + 8;
 					int y = rand.nextInt(16) + 8;
-					}
 				}
+			}
 		}
 	}
 }

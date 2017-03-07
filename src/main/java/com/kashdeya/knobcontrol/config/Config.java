@@ -2287,7 +2287,7 @@ public class Config {
         TerrainControlHandler.noShroom = config.getBoolean("Little Shrooms", category + " Worldgen Options", false, "Disable Little Shrooms from Generating?");
         TerrainControlHandler.noTree = config.getBoolean("Trees", category + " Worldgen Options", false, "Disable Trees from Generating?");
         TerrainControlHandler.plainsTrees = config.getBoolean("Plains Biome Trees", category + " Worldgen Options", true, "Enable Tree Generation in the Plains Biome?");
-		
+        
 		if (config.hasChanged() == true){
 	        config.save();
 	    }
