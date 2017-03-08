@@ -2,6 +2,8 @@ package com.kashdeya.knobcontrol.main;
 
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
+import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.kashdeya.knobcontrol.config.Config;
@@ -61,11 +64,11 @@ public class KnobControl {
     	// Events
 		MinecraftForge.EVENT_BUS.register(instance);
 		MinecraftForge.EVENT_BUS.register(new Events());
-		MinecraftForge.EVENT_BUS.register(new OreControl());
+		MinecraftForge.ORE_GEN_BUS.register(new OreControl());
 		MinecraftForge.EVENT_BUS.register(new RandomBones());
 		MinecraftForge.EVENT_BUS.register(new RemoveDrops());
 		MinecraftForge.EVENT_BUS.register(new RemoveMobs());
-		MinecraftForge.EVENT_BUS.register(new TerrainControl());
+		MinecraftForge.TERRAIN_GEN_BUS.register(new TerrainControl());
 		MinecraftForge.EVENT_BUS.register(new Server());
 		
 		// Extras
@@ -103,5 +106,4 @@ public class KnobControl {
     		game.setOrCreateGameRule("keepInventory", "true");
     	}
     }
-
 }
