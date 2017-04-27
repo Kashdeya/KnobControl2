@@ -15,5 +15,5 @@ public class ModularsHandler {
 	public static boolean terrainControl = false;
 	public static boolean uncrafting = false;
 	public static boolean hardcore = false;
-
+	public static boolean lightLevels = false;
 }

@@ -9,6 +9,7 @@ import com.kashdeya.knobcontrol.handlers.CraftingHandler;
 import com.kashdeya.knobcontrol.handlers.EventsHandler;
 import com.kashdeya.knobcontrol.handlers.FurnaceHandler;
 import com.kashdeya.knobcontrol.handlers.ItemStackHandler;
+import com.kashdeya.knobcontrol.handlers.LightLevelHandler;
 import com.kashdeya.knobcontrol.handlers.MobSpawnsHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 import com.kashdeya.knobcontrol.handlers.OreHandler;
@@ -39,22 +40,23 @@ public class Config {
 		
 		config.addCustomCategoryComment(category + " 1.Modulars", "Enable or Disable All Modular configs here first before editing other config files.");
 		ModularsHandler.crafting = config.getBoolean("Extra Crafting Modular",  category + " 1.Modulars", true, "Enable Extra Crafting Modular Config?");
-		ModularsHandler.events = config.getBoolean("Mob Events Modular",  category + " 1.Modulars", true, "Enable Mob Events Modular Config?");
+		ModularsHandler.events = config.getBoolean("Mob Events Modular",  category + " 1.Modulars", false, "Enable Mob Events Modular Config?");
 		ModularsHandler.furnace = config.getBoolean("Furnace Modular",  category + " 1.Modulars", true, "Enable Furnace Modular Config?");
-		ModularsHandler.hardcore = config.getBoolean("Hardcore Modular",  category + " 1.Modulars", true, "Enable Hardcore Modular Config?");
-		ModularsHandler.itemStacks = config.getBoolean("Item Stack Size Modular",  category + " 1.Modulars", true, "Enable Item Stack Size Modular Config?");
-		ModularsHandler.mobSpawns = config.getBoolean("Mob Spawn Modular",  category + " 1.Modulars", true, "Enable Mob Spawn Modular Config?");
-		ModularsHandler.oreControl = config.getBoolean("Ore Control Modular",  category + " 1.Modulars", true, "Enable Ore Control Modular Config?");
-		ModularsHandler.randomBones = config.getBoolean("Random Bone Drops Modular",  category + " 1.Modulars", true, "Enable Random Bone Drops Modular Config?");
+		ModularsHandler.hardcore = config.getBoolean("Hardcore Modular",  category + " 1.Modulars", false, "Enable Hardcore Modular Config?");
+		ModularsHandler.itemStacks = config.getBoolean("Item Stack Size Modular",  category + " 1.Modulars", false, "Enable Item Stack Size Modular Config?");
+		ModularsHandler.mobSpawns = config.getBoolean("Mob Spawn Modular",  category + " 1.Modulars", false, "Enable Mob Spawn Modular Config?");
+		ModularsHandler.oreControl = config.getBoolean("Ore Control Modular",  category + " 1.Modulars", false, "Enable Ore Control Modular Config?");
+		ModularsHandler.randomBones = config.getBoolean("Random Bone Drops Modular",  category + " 1.Modulars", false, "Enable Random Bone Drops Modular Config?");
 		ModularsHandler.remove = config.getBoolean("Remove Vanilla Items Modular",  category + " 1.Modulars", true, "Enable Remove Vanilla Items Modular Config?");
-		ModularsHandler.removeDrops = config.getBoolean("Remove Drops Modular",  category + " 1.Modulars", true, "Enable Remove Drops Modular Config?");
-		ModularsHandler.removeMobs = config.getBoolean("Remove Mobs Modular",  category + " 1.Modulars", true, "Enable Remove Mobs Modular Config?");
-		ModularsHandler.terrainControl = config.getBoolean("Terrain Control Modular",  category + " 1.Modulars", true, "Enable Terrain Control Modular Config?");
-		ModularsHandler.uncrafting = config.getBoolean("Uncrafting Modular",  category + " 1.Modulars", true, "Enable Uncrafting Modular Config?");
+		ModularsHandler.removeDrops = config.getBoolean("Remove Drops Modular",  category + " 1.Modulars", false, "Enable Remove Drops Modular Config?");
+		ModularsHandler.removeMobs = config.getBoolean("Remove Mobs Modular",  category + " 1.Modulars", false, "Enable Remove Mobs Modular Config?");
+		ModularsHandler.terrainControl = config.getBoolean("Terrain Control Modular",  category + " 1.Modulars", false, "Enable Terrain Control Modular Config?");
+		ModularsHandler.uncrafting = config.getBoolean("Uncrafting Modular",  category + " 1.Modulars", false, "Enable Uncrafting Modular Config?");
+		ModularsHandler.lightLevels = config.getBoolean("Mob Light Levels",  category + " 1.Modulars", false, "Enable Light Level Modular Config?");
 		
         // Client Side Changes
         config.addCustomCategoryComment(category + " Client Options", "true or false");
-        ClientHandler.f3Off = config.getBoolean("F3 Debug", category + " Client Options", true, "Disable the F3 Debug?");
+        ClientHandler.f3Off = config.getBoolean("F3 Debug", category + " Client Options", false, "Disable the F3 Debug?");
         ClientHandler.foodInfoOff = config.getBoolean("Food Info", category + " Client Options", true, "Enable Food Saturation Tooltip?");
         ClientHandler.fovOff = config.getBoolean("Field of View", category + " Client Options", true, "Stop FOV from changing due to potions and flight?");
         ClientHandler.potionOff = config.getBoolean("Potion Icons", category + " Client Options", true, "Remove Potion Icons from top right of Screen?");
@@ -63,7 +65,7 @@ public class Config {
         // Server Side Changes
         config.addCustomCategoryComment(category + " Misc Options", "true or false");
         ServerHandler.inWall = config.getBoolean("Spawn in Wall", category + " Misc Options", true, "Stop getting hurt from spawning in a wall?");
-        ServerHandler.melonDrop = config.getBoolean("Melon Drops", category + " Misc Options", true, "Melons drop full Melons instead of slices?");
+        ServerHandler.melonDrop = config.getBoolean("Melon Drops", category + " Misc Options", false, "Melons drop full Melons instead of slices?");
         ServerHandler.passThrough = config.getBoolean("Pass Through Signs", category + " Misc Options", true, "Enable Player to pass through a sign?");
         ServerHandler.safeOff = config.getBoolean("Safe Mobs", category + " Misc Options", true, "Stop the Mobs you are riding from getting hurt from your weapon.");
         ServerHandler.keepInvo = config.getBoolean("Keep Inventory", category + " Misc Options", false, "Allow players to keep inventory on death?");
@@ -75,7 +77,7 @@ public class Config {
 		// Leaf Decay
 		config.addCustomCategoryComment(category + " Bedrock", "true or false");
 		ServerHandler.flatBedrock = config.getBoolean("Flat Bedrock",  category + " Bedrock", true, "Enable Flat Bedrock?");
-		
+				
 		// Leaf Decay
 		config.addCustomCategoryComment(category + " Leaf Decay", "Leaf Decay");
 		ServerHandler.DecayFuzz = config.getInt("Leaves Decay Fuzz", category + " Leaf Decay", 3, 0, 20, "How random leaves Decay! \n(Lower means less random)");
@@ -110,6 +112,49 @@ public class Config {
 		if (config.hasChanged() == true){
         config.save();
         }
+	}
+	
+	public static void initLightLevels()
+	{
+		File f = new File(configDir, "Light Levels Modular.cfg");
+        config = new Configuration(f);
+        
+        config.load();
+        
+		String category;
+		
+		category = "Light Levels Modular";
+		
+		// Light Levels
+		config.addCustomCategoryComment(category + " Light Levels", "Lower the Light Level = No Spawn");
+		LightLevelHandler.Blaze = config.getBoolean("Blaze", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityBlaze = config.getInt("Blaze Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.CaveSpider = config.getBoolean("CaveSpider", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityCaveSpider = config.getInt("CaveSpider Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Creeper = config.getBoolean("Creeper", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityCreeper = config.getInt("Creeper Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Enderman = config.getBoolean("Enderman", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityEnderman = config.getInt("Enderman Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.GiantZombie = config.getBoolean("GiantZombie", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityGiantZombie = config.getInt("GiantZombie Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.MagmaCube = config.getBoolean("MagmaCube", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityMagmaCube = config.getInt("MagmaCube Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.PigZombie = config.getBoolean("PigZombie", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityPigZombie = config.getInt("PigZombie Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Skeleton = config.getBoolean("Skeleton", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntitySkeleton = config.getInt("Skeleton Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Slime = config.getBoolean("Slime", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntitySlime = config.getInt("Slime Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Spider = config.getBoolean("Spider", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntitySpider = config.getInt("Spider Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Witch = config.getBoolean("Witch", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityWitch = config.getInt("Witch Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		LightLevelHandler.Zombie = config.getBoolean("Zombie", category + " Light Levels", false, "Enable?");
+		LightLevelHandler.EntityZombie = config.getInt("Zombie Spawn", category + " Light Levels", 10, 1, 15, "Sets Spawn Light Level.");
+		
+		if (config.hasChanged() == true){
+	        config.save();
+	    }
 	}
 	
 	public static void initRemoveDrops()
@@ -832,14 +877,14 @@ public class Config {
 	
 	public static void initMobSpawns()
 	{
-		File f = new File(configDir, "Mob Spawns Config.cfg");
+		File f = new File(configDir, "Mob Spawns Modular.cfg");
         config = new Configuration(f);
         
         config.load();
         
 		String category;
 		
-		category = "Mob Spawns Configs";
+		category = "Mob Spawns Modular";
 		
 		// Blaze
         config.addCustomCategoryComment(category + " Blaze", "true or false");

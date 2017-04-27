@@ -3,6 +3,9 @@ package com.kashdeya.knobcontrol.util;
 import java.util.HashSet;
 import java.util.Random;
 
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.ServerHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -32,6 +35,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -47,9 +51,6 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.ServerHandler;
 
 public class Server {
 	
@@ -129,14 +130,12 @@ public class Server {
 
 			World world = event.getEntityPlayer().getEntityWorld();
 
-			if(world.isDaytime() && !setSpawnDay) return;
-
 			if(world.provider.canRespawnHere() && world.provider.getBiomeForCoords(event.getPos()) != Biomes.HELL)
 			{
 				EntityPlayer entityPlayer = event.getEntityPlayer();
 				entityPlayer.setSpawnPoint(event.getPos(), false);
 				entityPlayer.setSpawnChunk(event.getPos(), false, event.getEntityPlayer().dimension);
-				entityPlayer.addChatComponentMessage(new TextComponentTranslation("Spawn Point Set!"));
+				entityPlayer.addChatComponentMessage(new TextComponentTranslation("Spawn Set!"));
 			}
 		}
 	}
