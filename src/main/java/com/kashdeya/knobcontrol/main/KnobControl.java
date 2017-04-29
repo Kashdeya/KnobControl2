@@ -1,7 +1,10 @@
 package com.kashdeya.knobcontrol.main;
 
+import java.io.File;
+
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -22,6 +25,7 @@ import com.kashdeya.knobcontrol.handlers.ServerHandler;
 import com.kashdeya.knobcontrol.modulars.Events;
 import com.kashdeya.knobcontrol.modulars.ItemStacks;
 import com.kashdeya.knobcontrol.modulars.LightLevels;
+import com.kashdeya.knobcontrol.modulars.MobDrops;
 import com.kashdeya.knobcontrol.modulars.MobSpawns;
 import com.kashdeya.knobcontrol.modulars.OreControl;
 import com.kashdeya.knobcontrol.modulars.RandomBones;
@@ -103,7 +107,11 @@ public class KnobControl {
     }
 
     @EventHandler
-    public void postInit(FMLPostInitializationEvent e) {}
+    public void postInit(FMLPostInitializationEvent e) 
+    {
+		
+		MobDrops.generateConfigFile(new Configuration(new File(Config.configDir, "mobdrops.cfg")));
+    }
     
     @EventHandler
     public void serverStart(FMLServerStartedEvent e){
