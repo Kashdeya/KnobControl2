@@ -29,6 +29,7 @@ public class Config {
 	
 	public static void initMain()
 	{
+		
 		File f = new File(configDir, "Main Config.cfg");
         config = new Configuration(f);
         
