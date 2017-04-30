@@ -21,11 +21,13 @@ public class MobDrops
 {
 
 	// Key: MobID
+	// Done
 	public static final HashMap<String, ArrayList<ItemDrop>> MOB_DROP_LIST = new HashMap<String, ArrayList<ItemDrop>>();
 	public static final HashMap<String, ArrayList<ItemDrop>> MOB_DROP_LIST_PLAYER_KILL = new HashMap<String, ArrayList<ItemDrop>>();
 	
 	
-	// Run this on post loading so that way all entities and items should already be loaded into the game. 
+	// Run this on post loading so that way all entities and items should already be loaded into the game.
+	// Done
 	public static void generateConfigFile(Configuration config)
 	{
 		
@@ -40,7 +42,7 @@ public class MobDrops
 			// Checks if its based of EntityLivingBase
 			if(EntityLivingBase.class.isAssignableFrom(clazz))
 			{
-				config.addCustomCategoryComment(entity.getKey(), "Adding Drops Example: 'ModID:Item:Meta:Qty:Chance(0.01 - 1)'");
+				config.addCustomCategoryComment(entity.getKey(), "Adding Drops Example: \nModID:Item:Meta:Qty(Random 1 - number set):Chance(0.01 - 1) \nminecraft:glass:0:15:1 ");
 				
 				MOB_DROP_LIST.put(entity.getKey(), ItemDrop.getArrayItemDrops(config.get(entity.getKey(), "drops", new String[0]).getStringList()));
 				
@@ -52,7 +54,8 @@ public class MobDrops
 		config.save();
 	}
 	
-	// I dont have the actual @SubscribeEvent event registered.. 
+	// I dont have the actual @SubscribeEvent event registered..
+	// Done
 	@SubscribeEvent
 	public void onEntityDeath(LivingDropsEvent event)
 	{

@@ -5,6 +5,9 @@ public class EventsHandler {
 	// Wither Spawn
 	public static boolean witherSpawn = false;
 	
+	// Creeper Damage
+	public static boolean creeperDamage = false;
+	
 	// Extra Drops
 	public static boolean extraDropsEnderman = false;
 	public static int endermanDrops = 1;

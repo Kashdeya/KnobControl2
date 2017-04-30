@@ -1,6 +1,7 @@
 package com.kashdeya.knobcontrol.util;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
@@ -15,6 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityBat;
@@ -35,7 +37,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -135,7 +136,7 @@ public class Server {
 				EntityPlayer entityPlayer = event.getEntityPlayer();
 				entityPlayer.setSpawnPoint(event.getPos(), false);
 				entityPlayer.setSpawnChunk(event.getPos(), false, event.getEntityPlayer().dimension);
-				entityPlayer.addChatComponentMessage(new TextComponentTranslation("Spawn Set!"));
+				entityPlayer.addChatComponentMessage(new TextComponentTranslation("Spawn has been Set!"));
 			}
 		}
 	}
@@ -145,31 +146,29 @@ public class Server {
 	@SubscribeEvent
 	public void onLivingAttackEvent(LivingAttackEvent event) {
 		if (ServerHandler.spidersApplySlowness) {
+			HashSet<EntityLivingBase> poisonedEntities = new HashSet<>();
 			if (event.getSource().getDamageType().equals("mob") && event.getSource().getEntity() instanceof EntitySpider) {
-				event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1));
+				if (poisonedEntities.contains(event.getEntityLiving())) {
+					event.getEntityLiving().removePotionEffect(MobEffects.POISON);
+					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, ServerHandler.slownessTicks * 20, ServerHandler.slownessLevel));
+					poisonedEntities.remove(event.getEntityLiving());
+				}
 			}
 		}
 
 		if (ServerHandler.CaveSpiderPoison) {
 			HashSet<EntityLivingBase> poisonedEntities = new HashSet<>();
 			if (event.getSource().getDamageType().equals("mob") && event.getSource().getEntity() instanceof EntityCaveSpider) {
-				poisonedEntities.add(event.getEntityLiving());
+				if (poisonedEntities.contains(event.getEntityLiving())) {
+					event.getEntityLiving().removePotionEffect(MobEffects.POISON);
+					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, ServerHandler.weaknessTicks * 20, ServerHandler.weaknessLevel));
+					poisonedEntities.remove(event.getEntityLiving());
+				}
 			}
 		}
-		
 	}
 	
 	@SubscribeEvent
-	public void onLivingUpdateEvent(LivingUpdateEvent event) {
-		HashSet<EntityLivingBase> poisonedEntities = new HashSet<>();
-		if (poisonedEntities.contains(event.getEntityLiving())) {
-			event.getEntityLiving().removePotionEffect(MobEffects.POISON);
-			event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 15 * 20));
-			poisonedEntities.remove(event.getEntityLiving());
-		}
-}
-	
-    @SubscribeEvent
     public void interact(EntityInteractSpecific entityInteractEvent){
     	if (ServerHandler.villagerTrading){
     		if(entityInteractEvent.getTarget() instanceof EntityVillager){
@@ -179,17 +178,8 @@ public class Server {
     }
 	
 	@SubscribeEvent
-	public void onWorldTick(TickEvent.WorldTickEvent event)
-	{
-		if(ServerHandler.regenOff){
-			event.world.getGameRules().setOrCreateGameRule("naturalRegeneration", "false");
-		}
-		
-	}
-	
-	@SubscribeEvent
     public void harvest(BlockEvent.HarvestDropsEvent event) {
-		if(ServerHandler.melonDrop){
+		if (ServerHandler.melonDrop){
         if (event.getState().getBlock().equals(Blocks.MELON_BLOCK)) {
             event.getDrops().clear();
             event.getDrops().add(new ItemStack(Blocks.MELON_BLOCK, 1));
@@ -265,6 +255,7 @@ public class Server {
 					}
 				}
 			}
+		
 		if (ServerHandler.featherDrops){
 			EntityChicken chicken;
 			if (event.getEntity().worldObj.isRemote || !(event.getEntity() instanceof EntityChicken))
@@ -305,14 +296,14 @@ public class Server {
 	      int hungerInterval = 300;
 	      float hungerLoss = Math.round((float)(sleepTime / hungerInterval));
 	      event.getEntityPlayer().getFoodStats().addExhaustion(hungerLoss);
-	      }
 	    }
+	}
 	  
 	@SubscribeEvent
 	public void PlayerHurt(LivingHurtEvent event){
-		if ((event.getEntityLiving() instanceof EntityPlayer)){
+		if ((event.getEntityLiving() instanceof EntityPlayer) && (ServerHandler.ReducePoison)){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			if ((player.isPotionActive(Potion.getPotionById(19))) && (ServerHandler.ReducePoison) && (event.getSource().damageType == DamageSource.magic.getDamageType())) {
+			if ((player.isPotionActive(Potion.getPotionById(19))) && (event.getSource().damageType == DamageSource.magic.getDamageType())) {
 				event.setAmount(ServerHandler.DmgDecrease);
 				}
 			}
@@ -404,5 +395,55 @@ public class Server {
         if (event.world.getWorldInfo().isThundering())
             event.world.getWorldInfo().setThundering(false);
         }
+	}
+	
+	@SubscribeEvent
+	public void playerUpdate(LivingUpdateEvent updateEvent)
+	{
+		EntityLivingBase entity = updateEvent.getEntityLiving();
+		if (ModularsHandler.hardcore){
+			if (ServerHandler.netherrackBurn){
+				burnPlayer(entity);
+			}
+		}
+	}
+	
+	private void burnPlayer(EntityLivingBase entity)
+	{
+		if (ServerHandler.netherrackBurn){
+			if (entity.dimension == -1 && entity.ticksExisted % 50 == 0 && !entity.isAirBorne)
+			{
+				World world = entity.worldObj;
+				BlockPos entityPos = entity.getPosition();
+				BlockPos ground = new BlockPos(entityPos.getX(), entityPos.getY() - 1, entityPos.getZ());
+				Block block = world.getBlockState(ground).getBlock();
+
+				if ((entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode || !(entity instanceof EntityPlayer)) && ((entity.getActivePotionEffect(MobEffects.FIRE_RESISTANCE) == null || !entity.isImmuneToFire())) && (block == Blocks.NETHERRACK))
+				{
+					entity.setFire(ServerHandler.burnTime);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void blockBreak(BlockEvent.BreakEvent event)
+	{
+		if (ServerHandler.pigmanAngry){
+			EntityPlayer player;
+			
+			player = event.getPlayer();
+			int chance = event.getWorld().rand.nextInt(ServerHandler.pigmanAngryChance);
+			
+			List<EntityPigZombie> list = player.getEntityWorld().getEntitiesWithinAABB(EntityPigZombie.class, player.getEntityBoundingBox().expand(20.0D, 20.0D, 20.0D));
+			
+			if ((!player.capabilities.isCreativeMode) && (chance == 0) && (!list.isEmpty())) {
+				for (EntityPigZombie entity : list)
+				{
+					entity.setRevengeTarget(player);
+					entity.setAttackTarget(player);
+				}
+			}
+		}
 	}
 }

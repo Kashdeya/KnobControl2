@@ -2,6 +2,30 @@ package com.kashdeya.knobcontrol.main;
 
 import java.io.File;
 
+import com.kashdeya.knobcontrol.config.Config;
+import com.kashdeya.knobcontrol.handlers.BedrockHandler;
+import com.kashdeya.knobcontrol.handlers.ClientHandler;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.ServerHandler;
+import com.kashdeya.knobcontrol.modulars.Crafting;
+import com.kashdeya.knobcontrol.modulars.Events;
+import com.kashdeya.knobcontrol.modulars.Furnace;
+import com.kashdeya.knobcontrol.modulars.ItemStacks;
+import com.kashdeya.knobcontrol.modulars.LightLevels;
+import com.kashdeya.knobcontrol.modulars.MobDrops;
+import com.kashdeya.knobcontrol.modulars.MobSpawns;
+import com.kashdeya.knobcontrol.modulars.OreControl;
+import com.kashdeya.knobcontrol.modulars.RandomBones;
+import com.kashdeya.knobcontrol.modulars.Remove;
+import com.kashdeya.knobcontrol.modulars.RemoveDrops;
+import com.kashdeya.knobcontrol.modulars.RemoveMobs;
+import com.kashdeya.knobcontrol.modulars.TerrainControl;
+import com.kashdeya.knobcontrol.modulars.Uncrafting;
+import com.kashdeya.knobcontrol.proxy.CommonProxy;
+import com.kashdeya.knobcontrol.util.Client;
+import com.kashdeya.knobcontrol.util.PotionShift;
+import com.kashdeya.knobcontrol.util.Server;
+
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -17,26 +41,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.kashdeya.knobcontrol.config.Config;
-import com.kashdeya.knobcontrol.handlers.BedrockHandler;
-import com.kashdeya.knobcontrol.handlers.ClientHandler;
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.ServerHandler;
-import com.kashdeya.knobcontrol.modulars.Events;
-import com.kashdeya.knobcontrol.modulars.ItemStacks;
-import com.kashdeya.knobcontrol.modulars.LightLevels;
-import com.kashdeya.knobcontrol.modulars.MobDrops;
-import com.kashdeya.knobcontrol.modulars.MobSpawns;
-import com.kashdeya.knobcontrol.modulars.OreControl;
-import com.kashdeya.knobcontrol.modulars.RandomBones;
-import com.kashdeya.knobcontrol.modulars.RemoveDrops;
-import com.kashdeya.knobcontrol.modulars.RemoveMobs;
-import com.kashdeya.knobcontrol.modulars.TerrainControl;
-import com.kashdeya.knobcontrol.proxy.CommonProxy;
-import com.kashdeya.knobcontrol.util.Client;
-import com.kashdeya.knobcontrol.util.PotionShift;
-import com.kashdeya.knobcontrol.util.Server;
-
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 
 public class KnobControl {
@@ -46,6 +50,8 @@ public class KnobControl {
 	
 	@SidedProxy(clientSide=Reference.PROXY_CLIENT, serverSide=Reference.PROXY_COMMON)
 	public static CommonProxy PROXY;
+	
+	public static final File configDir = new File("config/Knob Control");
 	
 	@EventHandler
     public void preInit(FMLPreInitializationEvent e) {
@@ -66,32 +72,44 @@ public class KnobControl {
 		Config.initRemoveDrops();
 		Config.initLightLevels();
 		
-    	// Events
+    	// Modular Events
 		MinecraftForge.EVENT_BUS.register(instance);
-		MinecraftForge.EVENT_BUS.register(new Events());
-		MinecraftForge.ORE_GEN_BUS.register(new OreControl());
-		MinecraftForge.EVENT_BUS.register(new RandomBones());
-		MinecraftForge.EVENT_BUS.register(new RemoveDrops());
-		MinecraftForge.EVENT_BUS.register(new RemoveMobs());
-		MinecraftForge.EVENT_BUS.register(new LightLevels());
-		MinecraftForge.TERRAIN_GEN_BUS.register(new TerrainControl());
-		MinecraftForge.EVENT_BUS.register(new Server());
 		
-		// Extras
+		if (ModularsHandler.events){
+			MinecraftForge.EVENT_BUS.register(new Events());
+		}
+		if (ModularsHandler.oreControl){
+			MinecraftForge.ORE_GEN_BUS.register(new OreControl());
+		}
+		if (ModularsHandler.randomBones){
+			MinecraftForge.EVENT_BUS.register(new RandomBones());
+		}
+		if (ModularsHandler.removeDrops){
+			MinecraftForge.EVENT_BUS.register(new RemoveDrops());
+		}
+		if (ModularsHandler.removeMobs){
+			MinecraftForge.EVENT_BUS.register(new RemoveMobs());
+		}
+		if (ModularsHandler.lightLevels){
+			MinecraftForge.EVENT_BUS.register(new LightLevels());
+		}
+		if (ModularsHandler.terrainControl){
+			MinecraftForge.TERRAIN_GEN_BUS.register(new TerrainControl());
+		}
+		if (ModularsHandler.mobDrops){
+			MinecraftForge.EVENT_BUS.register(new MobDrops());
+		}
 		if (ModularsHandler.mobSpawns){
 			MobSpawns.spawn();
-		}
-		
+		}		
 		if (ModularsHandler.itemStacks){
 			ItemStacks.registerTweaks();
 		}
 		
-		if (BedrockHandler.flatBedrock)
-		{
-    		GameRegistry.registerWorldGenerator(new BedrockHandler(), 0);
-    	}
+		// Server Only
+		MinecraftForge.EVENT_BUS.register(new Server());
 		
-		
+		// Client Only
 		if (e.getSide() == Side.CLIENT) 
 		{  
 			MinecraftForge.EVENT_BUS.register(new Client());
@@ -99,6 +117,28 @@ public class KnobControl {
 				MinecraftForge.EVENT_BUS.register(new PotionShift());
 			}
 		}
+		
+    	// Recipes
+		if (ModularsHandler.crafting){
+			Crafting.registerRecipes();
+		}
+		if (ModularsHandler.remove){
+			Remove.registerRecipes();
+		}
+		if (ModularsHandler.uncrafting){
+			Uncrafting.registerRecipes();
+		}
+		
+    	// FuelHandler
+		if (ModularsHandler.furnace){
+			GameRegistry.registerFuelHandler(new Furnace());
+		}
+		
+    	// Load WorldGeneration
+		if (BedrockHandler.flatBedrock)
+		{
+    		GameRegistry.registerWorldGenerator(new BedrockHandler(), 0);
+    	}
     }
 
     @EventHandler
@@ -109,8 +149,7 @@ public class KnobControl {
     @EventHandler
     public void postInit(FMLPostInitializationEvent e) 
     {
-		
-		MobDrops.generateConfigFile(new Configuration(new File(Config.configDir, "mobdrops.cfg")));
+			MobDrops.generateConfigFile(new Configuration(new File(configDir, "Mob Drops Modular.cfg")));
     }
     
     @EventHandler
@@ -120,5 +159,25 @@ public class KnobControl {
     	if (ServerHandler.keepInvo){
     		game.setOrCreateGameRule("keepInventory", "true");
     	}
+    	
+		if (ServerHandler.regenOff){
+			game.setOrCreateGameRule("naturalRegeneration", "false");
+		}
+		
+		if (ServerHandler.lightCycle){
+			game.setOrCreateGameRule("doDaylightCycle", "false");
+		}
+		
+		if (ServerHandler.fireTick){
+			game.setOrCreateGameRule("doFireTick", "false");
+		}
+		
+		if (ServerHandler.mobGriefing){
+			game.setOrCreateGameRule("mobGriefing", "false");
+		}
+		
+		if (ServerHandler.pvp){
+			game.setOrCreateGameRule("pvp", "false");
+		}
     }
 }

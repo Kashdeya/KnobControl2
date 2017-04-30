@@ -16,4 +16,5 @@ public class ModularsHandler {
 	public static boolean uncrafting = false;
 	public static boolean hardcore = false;
 	public static boolean lightLevels = false;
+	public static boolean mobDrops = false;
 }

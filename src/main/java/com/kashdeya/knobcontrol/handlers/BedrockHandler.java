@@ -15,7 +15,7 @@ public class BedrockHandler implements IWorldGenerator {
 	
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
 	  {
-		if (flatBedrock == true){
+		if (flatBedrock){
 	    boolean isNether = (world.provider.getDimension() == -1);
 	    boolean isEnd = (world.provider.getDimension() == 1);
 	    if (isEnd){

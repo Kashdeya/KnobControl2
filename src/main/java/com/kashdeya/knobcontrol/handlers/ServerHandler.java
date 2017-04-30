@@ -2,19 +2,33 @@ package com.kashdeya.knobcontrol.handlers;
 
 public class ServerHandler {
 	
-	// Keep Invo
+	// Netherrack Burn
+	public static boolean netherrackBurn = false;
+	public static int burnTime = 2;
+	
+	// AngryPigman
+	public static boolean pigmanAngry = false;
+	public static int pigmanAngryChance = 1;
+	
+	// GameRules
 	public static boolean keepInvo = false;
+	public static boolean regenOff = false;
+	public static boolean lightCycle = false;
+	public static boolean fireTick = false;
+	public static boolean mobGriefing = false;
+	public static boolean pvp = false;
 	
 	// No Sleep
 	public static boolean noSleep = false;
 	
 	// Removed Poison
 	public static boolean spidersApplySlowness = false;
+	public static int slownessTicks = 1;
+	public static int slownessLevel = 0;
 	public static boolean CaveSpiderPoison = false;
+	public static int weaknessTicks = 1;
+	public static int weaknessLevel = 0;
 
-	// Health Regen
-	public static boolean regenOff = false;
-	
 	// Villages
 	public static boolean disableVillages = false;
 	
@@ -43,7 +57,7 @@ public class ServerHandler {
 	public static boolean featherDrops = false;
 	public static boolean chicksDropFeathers = false;
 	public static boolean forceFeatherDrop = false;
-	public static int dropFreq = 100000;
+	public static int dropFreq = 20000;
 	
 	// Wall no kill
 	public static boolean inWall = false;
@@ -104,6 +118,6 @@ public class ServerHandler {
 		
 	// Leaf Decay
 	public static boolean leafDecay = false;
-	public static int DecaySpeed;
-	public static int DecayFuzz;
+	public static int DecaySpeed = 5;
+	public static int DecayFuzz =3;
 }

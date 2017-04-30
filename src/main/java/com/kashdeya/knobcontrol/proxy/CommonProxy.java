@@ -14,15 +14,7 @@ public class CommonProxy {
 	}
 
     public void init() {
-    	// Recipes
-    	Crafting.registerRecipes();
-    	Remove.registerRecipes();
-    	Uncrafting.registerRecipes();
-    	
-    	// FuelHandler
-    	GameRegistry.registerFuelHandler(new Furnace());
-    	// Load WorldGeneration
-
+    	// Just a place holder
     }
 
 	public void registerRenderers() {

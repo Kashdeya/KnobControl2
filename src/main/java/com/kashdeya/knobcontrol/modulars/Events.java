@@ -3,6 +3,9 @@ package com.kashdeya.knobcontrol.modulars;
 import java.lang.reflect.Method;
 import java.util.Random;
 
+import com.kashdeya.knobcontrol.handlers.EventsHandler;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityWither;
@@ -23,23 +26,17 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.EventsHandler;
 
 public class Events {
 	
@@ -122,35 +119,36 @@ public class Events {
 	  }
 	  
 	  public void isPolarBear(Entity polarBear, EntityLivingBase player){
-	    if (chance(EventsHandler.polarbearPotionChance)){
-	    	if (EventsHandler.polarbearPlayerBlindness && EventsHandler.Polarbears){
+	    if (chance(EventsHandler.polarbearPotionChance))
+	    {
+	    	if (EventsHandler.polarbearPlayerBlindness){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, EventsHandler.polarbearBlind * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerNausea && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerNausea){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, EventsHandler.polarbearNausea * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerFatigue && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerFatigue){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, EventsHandler.polarbearDigSlow * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerInstant && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerInstant){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.INSTANT_DAMAGE, EventsHandler.polarbearInstant * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerHunger && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerHunger){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, EventsHandler.polarbearHunger * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerSlowness && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerSlowness){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, EventsHandler.polarbearMoveSlow * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerPoison && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerPoison){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.POISON, EventsHandler.polarbearPoison * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerWeakness && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerWeakness){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, EventsHandler.polarbearWeakness * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerWither && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerWither){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.WITHER, EventsHandler.polarbearWither * 20));
 	    	}
-	    	if (EventsHandler.polarbearPlayerUnluck && EventsHandler.Polarbears){
+	    	if (EventsHandler.polarbearPlayerUnluck){
 	    		player.addPotionEffect(new PotionEffect(MobEffects.UNLUCK, EventsHandler.polarbearUnluck * 20));
 	    	}
 	    }
@@ -722,15 +720,15 @@ public class Events {
 			EntityWither wither = (EntityWither) getWither;
 			if (wither.worldObj.provider.getDimension() == 0)
 			{
-				wither.setDead();
 				if (!event.getEntity().worldObj.isRemote)
 				{
-					EntityItem soulSand = new EntityItem(event.getEntity().worldObj, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(Blocks.SOUL_SAND, 2));
-					EntityItem skulls = new EntityItem(event.getEntity().worldObj, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(Items.SKULL, 1, 1).setStackDisplayName("No Withers in the Overworld"));
-
-					event.getEntity().getEntityWorld().spawnEntityInWorld(soulSand);
-					event.getEntity().getEntityWorld().spawnEntityInWorld(skulls);
+					ItemStack skulls = new ItemStack(Items.SKULL, 3, 1);
+					event.getEntity().entityDropItem(skulls, 0.0F);
+					
+					ItemStack soulSand = new ItemStack(Blocks.SOUL_SAND, 3);
+					event.getEntity().entityDropItem(soulSand, 0.0F);
 				}
+				wither.setDead();
 			}
 		}
 	}
@@ -742,5 +740,14 @@ public class Events {
 		   return true;
 	   }
 	   return false;
+	}
+	
+	@SubscribeEvent
+	public void explosion(ExplosionEvent.Detonate event) {
+		if (EventsHandler.creeperDamage){
+			if (event.getExplosion().getExplosivePlacedBy() instanceof EntityCreeper) {
+				event.getAffectedBlocks().clear();
+			}
+		}
 	}
 }
