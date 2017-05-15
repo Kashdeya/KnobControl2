@@ -57,7 +57,7 @@ public class Config {
 		ModularsHandler.mobDrops = config.getBoolean("Mob Drops",  category + " 1:Modulars", false, "Enable Mob Drops Modular Config?");
 		
         // Client Side Changes
-        config.addCustomCategoryComment(category + " Client Options", "false or false");
+        config.addCustomCategoryComment(category + " Client Options", "true or false");
         ClientHandler.f3Off = config.getBoolean("F3 Debug", category + " Client Options", false, "Disable the F3 Debug?");
         ClientHandler.foodInfoOff = config.getBoolean("Food Info", category + " Client Options", false, "Enable Food Saturation Tooltip?");
         ClientHandler.fovOff = config.getBoolean("Field of View", category + " Client Options", false, "Stop FOV from changing due to potions and flight?");
@@ -65,14 +65,14 @@ public class Config {
         ClientHandler.potionShift = config.getBoolean("Potion Shift", category + " Client Options", false, "Stop Inventory screen from shifting if potion effect is displayed?");
         
         // Server Side Changes
-        config.addCustomCategoryComment(category + " Misc Options", "false or false");
+        config.addCustomCategoryComment(category + " Misc Options", "true or false");
         ServerHandler.inWall = config.getBoolean("Spawn in Wall", category + " Misc Options", false, "Stop getting hurt from spawning in a wall?");
         ServerHandler.melonDrop = config.getBoolean("Melon Drops", category + " Misc Options", false, "Melons drop full Melons instead of slices?");
         ServerHandler.passThrough = config.getBoolean("Pass Through Signs", category + " Misc Options", false, "Enable Player to pass through a sign?");
         ServerHandler.safeOff = config.getBoolean("Safe Mobs", category + " Misc Options", false, "Stop the Mobs you are riding from getting hurt from your weapon.");
         
         // GameRules
-        config.addCustomCategoryComment(category + " GameRules", "false or false");
+        config.addCustomCategoryComment(category + " GameRules", "true or false");
         ServerHandler.keepInvo = config.getBoolean("Keep Inventory", category + " GameRules", false, "Allow players to keep inventory on death?");
         ServerHandler.regenOff = config.getBoolean("Natural Regeneration", category+ " GameRules", false, "Disable Natural Regeneration?");
         ServerHandler.lightCycle = config.getBoolean("Day-Night Cycle", category + " GameRules", false, "Disable Day-Night Cycle?");
@@ -81,11 +81,11 @@ public class Config {
         ServerHandler.pvp = config.getBoolean("PVP", category + " GameRules", false, "Disable Whether the player can fight with other player?");
         
 		// Village Control
-		config.addCustomCategoryComment(category + " Villages", "false or false");
+		config.addCustomCategoryComment(category + " Villages", "true or false");
 		ServerHandler.disableVillages = config.getBoolean("Villages",  category + " Villages", false, "Disable Villages?");
 		
 		// Leaf Decay
-		config.addCustomCategoryComment(category + " Bedrock", "false or false");
+		config.addCustomCategoryComment(category + " Bedrock", "true or false");
 		ServerHandler.flatBedrock = config.getBoolean("Flat Bedrock",  category + " Bedrock", false, "Enable Flat Bedrock?");
 				
 		// Leaf Decay
@@ -102,7 +102,7 @@ public class Config {
         ServerHandler.forceFeatherDrop = config.getBoolean("3. Feather Drop",  category + " Chicken Shed", false, "Feather Drops when killed");
                 
         // Poison Reduce
-        config.addCustomCategoryComment(category + " Poison Control", "false or false");
+        config.addCustomCategoryComment(category + " Poison Control", "true or false");
         ServerHandler.ReducePoison = config.getBoolean("Reduce Poison", category+ " Poison Control", false, "Enable Reduced Poison effect?");
         ServerHandler.DmgDecrease = config.getFloat("Reduce Poison Damage", category + " Poison Control", 0.05F, 0F, 1F, "Sets the amount of Poison Damage");
         
@@ -115,17 +115,17 @@ public class Config {
         ServerHandler.slownessLevel = config.getInt("Spiders Apply Weakness Level", category + " Poison Control", 0, 0, 2, "Sets the level of slowness");
         
         // Weather
-        config.addCustomCategoryComment(category + " Weather Options", "false or false");
+        config.addCustomCategoryComment(category + " Weather Options", "true or false");
         ServerHandler.NoMoreRain = config.getBoolean("Rain", category + " Weather Options", false, "Disable Rain?");
         ServerHandler.NoMoreThunder = config.getBoolean("Thunder", category + " Weather Options", false, "Disable Thunder?");
         
         // No Sleep
-        config.addCustomCategoryComment(category + " Sleep Options", "false or false");
+        config.addCustomCategoryComment(category + " Sleep Options", "true or false");
         ServerHandler.noSleep = config.getBoolean("Sleep", category + " Sleep Options", false, "Disable Sleeping?");
         
         // Wither
-        config.addCustomCategoryComment(category + " Wither", "false or false");
-        EventsHandler.witherSpawn = config.getBoolean("Wither Spawn", category + " Wither", true, "Enable Wither spawning only in the Nether?");
+        config.addCustomCategoryComment(category + " Wither", "true or false");
+        EventsHandler.witherSpawn = config.getBoolean("Wither Spawn", category + " Wither", false, "Enable Wither spawning only in the Nether?");
         
 		if (config.hasChanged() == true){
         config.save();
@@ -233,7 +233,7 @@ public class Config {
 		category = "Remove Drops Modular";
 		
 		// Mob Spawns
-        config.addCustomCategoryComment(category + " Mob Options", "false or false");
+        config.addCustomCategoryComment(category + " Mob Options", "true or false");
         RemoveDropsHandler.bat = config.getBoolean("Bat", category + " Mob Options", false, "Disable Drops?");
         RemoveDropsHandler.blaze = config.getBoolean("Blaze", category + " Mob Options", false, "Disable Drops?");
         RemoveDropsHandler.caveSpider = config.getBoolean("Cavespider", category + " Mob Options", false, "Disable Custom Drops?");
@@ -287,7 +287,7 @@ public class Config {
 		category = "Extra Crafting Modular";
 		
         // Old School Recipes
-        config.addCustomCategoryComment(category + " Old School Recipes", "false or false");
+        config.addCustomCategoryComment(category + " Old School Recipes", "true or false");
         CraftingHandler.appleOff = config.getBoolean("Old Notch Apple Recipe", category + " Old School Recipes", false, "Enable Old Notch Apple Recipe?");
         CraftingHandler.oldArrow = config.getBoolean("Old Arrow Recipe", category + " Old School Recipes", false, "Enable Old Arrow Recipe?");
         CraftingHandler.oldBook = config.getBoolean("Old Book Recipe", category + " Old School Recipes", false, "Enable Old Book Recipe?");
@@ -295,12 +295,12 @@ public class Config {
         CraftingHandler.oldOakFence = config.getBoolean("Old Oak Fence Recipe", category + " Old School Recipes", false, "Enable Old Oak Fence Recipe?");
         
 		// Recycle Recipes
-        config.addCustomCategoryComment(category + " Recycle Recipes", "false or false");
+        config.addCustomCategoryComment(category + " Recycle Recipes", "true or false");
         CraftingHandler.recycleIron = config.getBoolean("Recycle Iron", category + " Recycle Recipes", false, "Smelt Fully Repaired Iron Tools, Weapons and Armor back into Ingots?");
         CraftingHandler.recycleGold = config.getBoolean("Recycle Gold", category + " Recycle Recipes", false, "Smelt Fully Repaired Gold Tools, Weapons and Armor back into Ingots?");
         
         // Extra Recipes
-        config.addCustomCategoryComment(category + " Extra Recipes", "false or false");
+        config.addCustomCategoryComment(category + " Extra Recipes", "true or false");
         CraftingHandler.barrierBlock = config.getBoolean("World Barrier", category + " Extra Recipes", false, "Enable World Barrier Recipe?");
         CraftingHandler.chestOff = config.getBoolean("Chest Recipe", category + " Extra Recipes", false, "Enable Chest Recipe out of logs?");
         CraftingHandler.clayOff = config.getBoolean("Clay Recipe", category + " Extra Recipes", false, "Enable Clay Block Recipe?");
@@ -340,10 +340,10 @@ public class Config {
 		category = "Mob Events Modular";
 		
 		// Blaze
-		config.addCustomCategoryComment(category + " Blaze Config", "false or false");
+		config.addCustomCategoryComment(category + " Blaze Config", "true or false");
 		EventsHandler.Blazes = config.getBoolean("Potion Effects", category + " Blaze Config", false, "Enable potion effects when fighting a blaze?");
 		EventsHandler.blazePotionChance = config.getInt("Potion Chance", category + " Blaze Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Blaze Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Blaze Potion Effects", "true or false");
 		EventsHandler.blazePlayerBlindness = config.getBoolean("Blindness", category + " Blaze Potion Effects", false, "Enable Blindness?");
 		EventsHandler.blazeBlind = config.getInt("Blindness Duration", category + " Blaze Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.blazePlayerNausea = config.getBoolean("Nausea", category + " Blaze Potion Effects", false, "Enable Nausea?");
@@ -366,10 +366,10 @@ public class Config {
 		EventsHandler.blazeUnluck = config.getInt("Unluck Duration", category + " Blaze Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// CaveSpider
-		config.addCustomCategoryComment(category + " Cave Spider Config", "false or false");
+		config.addCustomCategoryComment(category + " Cave Spider Config", "true or false");
 		EventsHandler.CaveSpiders = config.getBoolean("Potion Effects", category + " Cave Spider Config", false, "Enable potion effects when fighting a cavespider?");
 		EventsHandler.caveSpiderPotionChance = config.getInt("Potion Chance", category + " Cave Spider Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Cave Spider Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Cave Spider Potion Effects", "true or false");
 		EventsHandler.caveSpiderPlayerBlindness = config.getBoolean("Blindness", category + " Cave Spider Potion Effects", false, "Enable Blindness?");
 		EventsHandler.caveSpiderBlind = config.getInt("Blindness Duration", category + " Cave Spider Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.caveSpiderPlayerNausea = config.getBoolean("Nausea", category + " Cave Spider Potion Effects", false, "Enable Nausea?");
@@ -392,14 +392,14 @@ public class Config {
 		EventsHandler.caveSpiderUnluck = config.getInt("Unluck Duration", category + " Cave Spider Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Creeper
-		config.addCustomCategoryComment(category + " Creeper Changes", "false or false");
+		config.addCustomCategoryComment(category + " Creeper Changes", "true or false");
 		EventsHandler.Creepers_Boom = config.getBoolean("Instant Explode", category + " Creeper Changes", false, "Creepers instantly exploding?");
 		EventsHandler.creeperBoomChance = config.getInt("Instant Explode Chance", category + " Creeper Changes", 2, 1, 20, "The chance of creepers instantly exploding.");
 		EventsHandler.creeperDamage = config.getBoolean("Block Damage", category + " Creeper Changes", false, "Disable Creeper Block Damage?");
-		config.addCustomCategoryComment(category + " Creeper Config", "false or false");
+		config.addCustomCategoryComment(category + " Creeper Config", "true or false");
 		EventsHandler.Creepers_Potions = config.getBoolean("Potion Effects", category + " Creeper Config", false, "Enable potion effects when fighting a creeper?");
 		EventsHandler.creeperPotionChance = config.getInt("Potion Chance", category + " Creeper Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Creeper Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Creeper Potion Effects", "true or false");
 		EventsHandler.caveSpiderPlayerBlindness = config.getBoolean("Blindness", category + " Creeper Potion Effects", false, "Enable Blindness?");
 		EventsHandler.caveSpiderBlind = config.getInt("Blindness Duration", category + " Creeper Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.caveSpiderPlayerNausea = config.getBoolean("Nausea", category + " Creeper Potion Effects", false, "Enable Nausea?");
@@ -422,12 +422,12 @@ public class Config {
 		EventsHandler.caveSpiderUnluck = config.getInt("Unluck Duration", category + " Creeper Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Endermen
-		config.addCustomCategoryComment(category + " Endermen Config", "false or false");
+		config.addCustomCategoryComment(category + " Endermen Config", "true or false");
 		EventsHandler.Endermen = config.getBoolean("Potion Effects", category + " Endermen Config", false, "Enable potion effects when fighting a enderman?");
 		EventsHandler.endermanPotionChance = config.getInt("Potion Chance", category + " Endermen Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
 		EventsHandler.extraDropsEnderman = config.getBoolean("Extra Drops", category + " Endermen Config", false, "Enable Extra ender pearl Drops?");
 		EventsHandler.endermanDrops = config.getInt("Extra Drops Amount", category + " Endermen Config", 1, 0, Integer.MAX_VALUE, "Amount of extra ender pearls to drop! \nDrops will be a random number between 1 and the number you put!");
-		config.addCustomCategoryComment(category + " Endermen Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Endermen Potion Effects", "true or false");
 		EventsHandler.endermanPlayerBlindness = config.getBoolean("Blindness", category + " Endermen Potion Effects", false, "Enable Blindness?");
 		EventsHandler.endermanBlind = config.getInt("Blindness Duration", category + " Endermen Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.endermanPlayerNausea = config.getBoolean("Nausea", category + " Endermen Potion Effects", false, "Enable Nausea?");
@@ -450,10 +450,10 @@ public class Config {
 		EventsHandler.endermanUnluck = config.getInt("Unluck Duration", category + " Endermen Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 			
 		// Endermite
-		config.addCustomCategoryComment(category + " Endermite Config", "false or false");
+		config.addCustomCategoryComment(category + " Endermite Config", "true or false");
 		EventsHandler.Endermites = config.getBoolean("Potion Effects", category + " Endermite Config", false, "Enable potion effects when fighting a endermite?");
 		EventsHandler.endermitePotionChance = config.getInt("Potion Chance", category + " Endermite Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Endermite Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Endermite Potion Effects", "true or false");
 		EventsHandler.endermitePlayerBlindness = config.getBoolean("Blindness", category + " Endermite Potion Effects", false, "Enable Blindness?");
 		EventsHandler.endermiteBlind = config.getInt("Blindness Duration", category + " Endermite Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.endermitePlayerNausea = config.getBoolean("Nausea", category + " Endermite Potion Effects", false, "Enable Nausea?");
@@ -476,10 +476,10 @@ public class Config {
 		EventsHandler.endermiteUnluck = config.getInt("Unluck Duration", category + " Endermite Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Ghast
-		config.addCustomCategoryComment(category + " Ghast Config", "false or false");
+		config.addCustomCategoryComment(category + " Ghast Config", "true or false");
 		EventsHandler.Ghasts = config.getBoolean("Potion Effects", category + " Ghast Config", false, "Enable potion effects when fighting a ghast?");
 		EventsHandler.ghastPotionChance = config.getInt("Potion Chance", category + " Ghast Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Ghast Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Ghast Potion Effects", "true or false");
 		EventsHandler.ghastPlayerBlindness = config.getBoolean("Blindness", category + " Ghast Potion Effects", false, "Enable Blindness?");
 		EventsHandler.ghastBlind = config.getInt("Blindness Duration", category + " Ghast Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.ghastPlayerNausea = config.getBoolean("Nausea", category + " Ghast Potion Effects", false, "Enable Nausea?");
@@ -502,10 +502,10 @@ public class Config {
 		EventsHandler.ghastUnluck = config.getInt("Unluck Duration", category + " Ghast Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Guardian
-		config.addCustomCategoryComment(category + " Guardian Config", "false or false");
+		config.addCustomCategoryComment(category + " Guardian Config", "true or false");
 		EventsHandler.Guardians = config.getBoolean("Potion Effects", category + " Guardian Config", false, "Enable potion effects when fighting a guardian?");
 		EventsHandler.guardianPotionChance = config.getInt("Potion Chance", category + " Guardian Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Guardian Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Guardian Potion Effects", "true or false");
 		EventsHandler.guardianPlayerBlindness = config.getBoolean("Blindness", category + " Guardian Potion Effects", false, "Enable Blindness?");
 		EventsHandler.guardianBlind = config.getInt("Blindness Duration", category + " Guardian Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.guardianPlayerNausea = config.getBoolean("Nausea", category + " Guardian Potion Effects", false, "Enable Nausea?");
@@ -528,10 +528,10 @@ public class Config {
 		EventsHandler.guardianUnluck = config.getInt("Unluck Duration", category + " Guardian Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// MagmaCube
-		config.addCustomCategoryComment(category + " Magmacube Config", "false or false");
+		config.addCustomCategoryComment(category + " Magmacube Config", "true or false");
 		EventsHandler.MagmaCubes = config.getBoolean("Potion Effects", category + " Magmacube Config", false, "Enable potion effects when fighting a magmacube?");
 		EventsHandler.magmacubePotionChance = config.getInt("Potion Chance", category + " Magmacube Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Magmacube Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Magmacube Potion Effects", "true or false");
 		EventsHandler.magmacubePlayerBlindness = config.getBoolean("Blindness", category + " Magmacube Potion Effects", false, "Enable Blindness?");
 		EventsHandler.magmacubeBlind = config.getInt("Blindness Duration", category + " Magmacube Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.magmacubePlayerNausea = config.getBoolean("Nausea", category + " Magmacube Potion Effects", false, "Enable Nausea?");
@@ -554,10 +554,10 @@ public class Config {
 		EventsHandler.magmacubeUnluck = config.getInt("Unluck Duration", category + " Magmacube Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// PigZombie
-		config.addCustomCategoryComment(category + " Pig Zombie Config", "false or false");
+		config.addCustomCategoryComment(category + " Pig Zombie Config", "true or false");
 		EventsHandler.PigZombies = config.getBoolean("Potion Effects", category + " Pig Zombie Config", false, "Enable potion effects when fighting a pig zombie?");
 		EventsHandler.pigzombiePotionChance = config.getInt("Potion Chance", category + " Pig Zombie Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Pig Zombie Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Pig Zombie Potion Effects", "true or false");
 		EventsHandler.pigzombiePlayerBlindness = config.getBoolean("Blindness", category + " Pig Zombie Potion Effects", false, "Enable Blindness?");
 		EventsHandler.pigzombieBlind = config.getInt("Blindness Duration", category + " Pig Zombie Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.pigzombiePlayerNausea = config.getBoolean("Nausea", category + " Pig Zombie Potion Effects", false, "Enable Nausea?");
@@ -580,10 +580,10 @@ public class Config {
 		EventsHandler.pigzombieUnluck = config.getInt("Unluck Duration", category + " Pig Zombie Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// PolarBear
-		config.addCustomCategoryComment(category + " Polarbear Config", "false or false");
+		config.addCustomCategoryComment(category + " Polarbear Config", "true or false");
 		EventsHandler.Polarbears = config.getBoolean("Potion Effects", category + " Polarbear Config", false, "Enable potion effects when fighting a polarbear?");
 		EventsHandler.polarbearPotionChance = config.getInt("Potion Chance", category + " Polarbear Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Polarbear Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Polarbear Potion Effects", "true or false");
 		EventsHandler.polarbearPlayerBlindness = config.getBoolean("Blindness", category + " Polarbear Potion Effects", false, "Enable Blindness?");
 		EventsHandler.polarbearBlind = config.getInt("Blindness Duration", category + " Polarbear Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.polarbearPlayerNausea = config.getBoolean("Nausea", category + " Polarbear Potion Effects", false, "Enable Nausea?");
@@ -606,10 +606,10 @@ public class Config {
 		EventsHandler.polarbearUnluck = config.getInt("Unluck Duration", category + " Polarbear Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Silverfish
-		config.addCustomCategoryComment(category + " Silverfish Config", "false or false");
+		config.addCustomCategoryComment(category + " Silverfish Config", "true or false");
 		EventsHandler.Silverfishs = config.getBoolean("Potion Effects", category + " Silverfish Config", false, "Enable potion effects when fighting a silverfish?");
 		EventsHandler.silverfishPotionChance = config.getInt("Potion Chance", category + " Silverfish Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Silverfish Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Silverfish Potion Effects", "true or false");
 		EventsHandler.silverfishPlayerBlindness = config.getBoolean("Blindness", category + " Silverfish Potion Effects", false, "Enable Blindness?");
 		EventsHandler.silverfishBlind = config.getInt("Blindness Duration", category + " Silverfish Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.silverfishPlayerNausea = config.getBoolean("Nausea", category + " Silverfish Potion Effects", false, "Enable Nausea?");
@@ -632,10 +632,10 @@ public class Config {
 		EventsHandler.silverfishUnluck = config.getInt("Unluck Duration", category + " Silverfish Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Skeleton
-		config.addCustomCategoryComment(category + " Skeleton Config", "false or false");
+		config.addCustomCategoryComment(category + " Skeleton Config", "true or false");
 		EventsHandler.Skeletons = config.getBoolean("Potion Effects", category + " Skeleton Config", false, "Enable potion effects when fighting a skeleton?");
 		EventsHandler.skeletonPotionChance = config.getInt("Potion Chance", category + " Skeleton Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Skeleton Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Skeleton Potion Effects", "true or false");
 		EventsHandler.skeletonPlayerBlindness = config.getBoolean("Blindness", category + " Skeleton Potion Effects", false, "Enable Blindness?");
 		EventsHandler.skeletonBlind = config.getInt("Blindness Duration", category + " Skeleton Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.skeletonPlayerNausea = config.getBoolean("Nausea", category + " Skeleton Potion Effects", false, "Enable Nausea?");
@@ -658,10 +658,10 @@ public class Config {
 		EventsHandler.skeletonUnluck = config.getInt("Unluck Duration", category + " Skeleton Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Slime
-		config.addCustomCategoryComment(category + " Slime Config", "false or false");
+		config.addCustomCategoryComment(category + " Slime Config", "true or false");
 		EventsHandler.Slimes = config.getBoolean("Potion Effects", category + " Slime Config", false, "Enable potion effects when fighting a slime?");
 		EventsHandler.slimePotionChance = config.getInt("Potion Chance", category + " Slime Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Slime Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Slime Potion Effects", "true or false");
 		EventsHandler.slimePlayerBlindness = config.getBoolean("Blindness", category + " Slime Potion Effects", false, "Enable Blindness?");
 		EventsHandler.slimeBlind = config.getInt("Blindness Duration", category + " Slime Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.slimePlayerNausea = config.getBoolean("Nausea", category + " Slime Potion Effects", false, "Enable Nausea?");
@@ -684,10 +684,10 @@ public class Config {
 		EventsHandler.slimeUnluck = config.getInt("Unluck Duration", category + " Slime Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Spider
-		config.addCustomCategoryComment(category + " Spider Config", "false or false");
+		config.addCustomCategoryComment(category + " Spider Config", "true or false");
 		EventsHandler.Spiders = config.getBoolean("Potion Effects", category + " Spider Config", false, "Enable potion effects when fighting a spider?");
 		EventsHandler.spiderPotionChance = config.getInt("Potion Chance", category + " Spider Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Spider Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Spider Potion Effects", "true or false");
 		EventsHandler.spiderPlayerBlindness = config.getBoolean("Blindness", category + " Spider Potion Effects", false, "Enable Blindness?");
 		EventsHandler.spiderBlind = config.getInt("Blindness Duration", category + " Spider Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.spiderPlayerNausea = config.getBoolean("Nausea", category + " Spider Potion Effects", false, "Enable Nausea?");
@@ -710,10 +710,10 @@ public class Config {
 		EventsHandler.spiderUnluck = config.getInt("Unluck Duration", category + " Spider Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Witch
-		config.addCustomCategoryComment(category + " Witch Config", "false or false");
+		config.addCustomCategoryComment(category + " Witch Config", "true or false");
 		EventsHandler.Witchs = config.getBoolean("Potion Effects", category + " Witch Config", false, "Enable potion effects when fighting a witch?");
 		EventsHandler.witchPotionChance = config.getInt("Potion Chance", category + " Witch Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Witch Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Witch Potion Effects", "true or false");
 		EventsHandler.witchPlayerBlindness = config.getBoolean("Blindness", category + " Witch Potion Effects", false, "Enable Blindness?");
 		EventsHandler.witchBlind = config.getInt("Blindness Duration", category + " Witch Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.witchPlayerNausea = config.getBoolean("Nausea", category + " Witch Potion Effects", false, "Enable Nausea?");
@@ -736,10 +736,10 @@ public class Config {
 		EventsHandler.witchUnluck = config.getInt("Unluck Duration", category + " Witch Potion Effects", 1, 0, 300, "Unluck duration in Ticks!/n(1 = 1 tick)");
 		
 		// Zombie
-		config.addCustomCategoryComment(category + " Zombie Config", "false or false");
+		config.addCustomCategoryComment(category + " Zombie Config", "true or false");
 		EventsHandler.Zombies = config.getBoolean("Potion Effects", category + " Zombie Config", false, "Enable potion effects when fighting a mob a zombie?");
 		EventsHandler.zombiePotionChance = config.getInt("Potion Chance", category + " Zombie Config", 2, 1, 20, "The chance of players getting potion effects when fighting a mob.");
-		config.addCustomCategoryComment(category + " Zombie Potion Effects", "false or false");
+		config.addCustomCategoryComment(category + " Zombie Potion Effects", "true or false");
 		EventsHandler.zombiePlayerBlindness = config.getBoolean("Blindness", category + " Zombie Potion Effects", false, "Enable Blindness?");
 		EventsHandler.zombieBlind = config.getInt("Blindness Duration", category + " Zombie Potion Effects", 1, 0, 300, "Blindness duration in Ticks!/n(1 = 1 tick)");
 		EventsHandler.zombiePlayerNausea = config.getBoolean("Nausea", category + " Zombie Potion Effects", false, "Enable Nausea?");
@@ -778,7 +778,7 @@ public class Config {
 		category = "Furnace Modular";
 		
 		// Furnace
-		config.addCustomCategoryComment(category + " Furnace Options", "false or false");
+		config.addCustomCategoryComment(category + " Furnace Options", "true or false");
 		FurnaceHandler.blazeBurn = config.getBoolean("Blaze Powder", category + " Furnace Options", false, "Enable Blaze Powders?");
 		Furnace.BlazeBurnTime = config.getInt("Blaze Powder Burn", category + " Furnace Options", 1500, 0, Integer.MAX_VALUE, "Blaze Powder Burn Time!");
 		FurnaceHandler.blazeRodBurn = config.getBoolean("Blaze Rod", category + " Furnace Options", false, "Enable Blaze Rods?");
@@ -845,7 +845,7 @@ public class Config {
 		category = "Item Stacks Modular";
 		
 		// Item Stacks
-		config.addCustomCategoryComment(category + " Item Stack Options", "false or false");
+		config.addCustomCategoryComment(category + " Item Stack Options", "true or false");
 		ItemStackHandler.boat = config.getBoolean("Boat", category + " Item Stack Options", false, "Enable Boat?");
 		ItemStackHandler.boatStack = config.getInt("Boat Stack", category + " Item Stack Options", 64, 1, 64, "Stack Size!");
 		ItemStackHandler.sboat = config.getBoolean("Spruce Boat", category + " Item Stack Options", false, "Enable Spruce Boat?");
@@ -918,22 +918,24 @@ public class Config {
 		category = "Hardcore Modular";
 		
 		// Mob Spawns
-        config.addCustomCategoryComment(category + " Hardcore Options", "false or false");
+        config.addCustomCategoryComment(category + " Hardcore Options", "true or false");
         ServerHandler.airOff = config.getBoolean("Instant Drown", category + " Hardcore Options", false, "Instant death when you run out of air?");
         ServerHandler.LavaHurts = config.getBoolean("Lava Kills", category + " Hardcore Options", false, "Lava Kills Player?");
         ServerHandler.NoSwim = config.getBoolean("No Swim", category + " Hardcore Options", false, "Disable Player Swim?");
-        ServerHandler.CactusHurts = config.getBoolean("Cactus Hurts", category + " Hardcore Options", false, "Cactus Kills Player?");
+        ServerHandler.CactusHurts = config.getBoolean("Cactus Kills", category + " Hardcore Options", false, "Cactus Kills Player?");
         ServerHandler.FallDamage = config.getBoolean("Fall Damage", category + " Hardcore Options", false, "Fall Damage kills Player?");
+        ServerHandler.SetFallDamage = config.getBoolean("Fall Damage Custom", category + " Hardcore Options", false, "Fall Damage kills Player?\n(Can not be used if Fall Damage is true!)");
+        ServerHandler.FallDamageAmount = config.getFloat("Fall Damage Custom Amount", category + " Hardcore Options", 10F, 0F, 20F, "Sets the amount of Damage Falling does to Player!");
         ServerHandler.FallingBlock = config.getBoolean("Falling Blocks", category + " Hardcore Options", false, "Falling Blocks kills Player?");
         ServerHandler.FoodOverhaul = config.getBoolean("Food Overhaul", category + " Hardcore Options", false, "Player Starves to Death if they don't eat?");
         ServerHandler.SleepHunger = config.getBoolean("Sleep Hunger", category + " Hardcore Options", false, "Do Players get hungery when they sleep?");
         ServerHandler.hungerLoss = config.getBoolean("Hunger Loss", category+ " Hardcore Options", false, "Enable Hunger Loss?");
-        ServerHandler.exhaustion = config.getFloat("Hunger Loss Amount", category + " Hardcore Options", 0.005F, 0F, 1F, "Sets the amount of Hunger Loss");
-        ServerHandler.inFire = config.getBoolean("Fire Kills", category+ " Hardcore Options", false, "Stepping into fire kills you?");
-        ServerHandler.onFire = config.getBoolean("On Fire Kills", category+ " Hardcore Options", false, "Being on fire kills you?");
-        ServerHandler.witherDeath = config.getBoolean("Wither Effect", category+ " Hardcore Options", false, "Wither Effect kills you?");
-        ServerHandler.dragonBreath = config.getBoolean("Dragon Breath", category+ " Hardcore Options", false, "Dragon Breath kills you?");
-        ServerHandler.Lightning = config.getBoolean("Lightning Strikes", category+ " Hardcore Options", false, "Lightning Strikes kills you?");
+        ServerHandler.exhaustion = config.getFloat("Hunger Loss Amount", category + " Hardcore Options", 0.005F, 0.001F, 1.0F, "Sets the amount of Hunger Loss");
+        ServerHandler.inFire = config.getBoolean("Fire Kills", category+ " Hardcore Options", false, "Stepping into fire Kills you?");
+        ServerHandler.onFire = config.getBoolean("On Fire Kills", category+ " Hardcore Options", false, "Being on fire Kills you?");
+        ServerHandler.witherDeath = config.getBoolean("Wither Effect", category+ " Hardcore Options", false, "Wither Effect Kills you?");
+        ServerHandler.dragonBreath = config.getBoolean("Dragon Breath", category+ " Hardcore Options", false, "Dragon Breath Kills you?");
+        ServerHandler.Lightning = config.getBoolean("Lightning Strikes", category+ " Hardcore Options", false, "Lightning Strikes Kills you?");
         ServerHandler.netherrackBurn = config.getBoolean("Netherrack Burn", category+ " Hardcore Options", false, "Disable Netherrack Burning Players?");
         ServerHandler.burnTime = config.getInt("Netherrack Burn Time", category + " Hardcore Options", 2, 1, 300, "Amount of Seconds the player burns for!");
         ServerHandler.pigmanAngry = config.getBoolean("Angry Pigman", category+ " Hardcore Options", false, "Enable Angry Pigman?");
@@ -956,7 +958,7 @@ public class Config {
 		category = "Mob Spawns Modular";
 		
 		// Blaze
-        config.addCustomCategoryComment(category + " Blaze", "false or false");
+        config.addCustomCategoryComment(category + " Blaze", "true or false");
         // Beach Biome
         MobSpawnsHandler.Blaze = config.getBoolean("Blaze", category + " Blaze", false, "Enable custom Blaze Spawns?");
         MobSpawnsHandler.BeachBlaze = config.getBoolean("Blaze Beach", category + " Blaze", false, "Enable Blaze Beach Spawns?");
@@ -1020,7 +1022,7 @@ public class Config {
         MobSpawnsHandler.EndBlazeMax = config.getInt("Blaze End Max Group Size", category + " Blaze", 5, 1, Integer.MAX_VALUE, "Blaze End Max Group Size!");
         
         // CaveSpider
-        config.addCustomCategoryComment(category + " CaveSpider", "false or false");
+        config.addCustomCategoryComment(category + " CaveSpider", "true or false");
         // Beach Biome
         MobSpawnsHandler.CaveSpider = config.getBoolean("CaveSpider", category + " CaveSpider", false, "Enable custom CaveSpider Spawns?");
         MobSpawnsHandler.BeachCaveSpider = config.getBoolean("CaveSpider Beach", category + " CaveSpider", false, "Enable CaveSpider Beach Spawns?");
@@ -1084,7 +1086,7 @@ public class Config {
         MobSpawnsHandler.EndCaveSpiderMax = config.getInt("CaveSpider End Max Group Size", category + " CaveSpider", 5, 1, Integer.MAX_VALUE, "CaveSpider End Max Group Size!");
         
         // Creeper
-        config.addCustomCategoryComment(category + " Creeper", "false or false");
+        config.addCustomCategoryComment(category + " Creeper", "true or false");
         // Beach Biome
         MobSpawnsHandler.Creeper = config.getBoolean("Creeper", category + " Creeper", false, "Enable custom Creeper Spawns?");
         MobSpawnsHandler.BeachCreeper = config.getBoolean("Creeper Beach", category + " Creeper", false, "Enable Creeper Beach Spawns?");
@@ -1148,7 +1150,7 @@ public class Config {
         MobSpawnsHandler.EndCreeperMax = config.getInt("Creeper End Max Group Size", category + " Creeper", 5, 1, Integer.MAX_VALUE, "Creeper End Max Group Size!");
         
         // Enderman
-        config.addCustomCategoryComment(category + " Enderman", "false or false");
+        config.addCustomCategoryComment(category + " Enderman", "true or false");
         // Beach Biome
         MobSpawnsHandler.Enderman = config.getBoolean("Enderman", category + " Enderman", false, "Enable custom Enderman Spawns?");
         MobSpawnsHandler.BeachEnderman = config.getBoolean("Enderman Beach", category + " Enderman", false, "Enable Enderman Beach Spawns?");
@@ -1212,7 +1214,7 @@ public class Config {
         MobSpawnsHandler.EndEndermanMax = config.getInt("Enderman End Max Group Size", category + " Enderman", 5, 1, Integer.MAX_VALUE, "Enderman End Max Group Size!");
         
         // Endermite
-        config.addCustomCategoryComment(category + " Endermite", "false or false");
+        config.addCustomCategoryComment(category + " Endermite", "true or false");
         // Beach Biome
         MobSpawnsHandler.Endermite = config.getBoolean("Endermite", category + " Endermite", false, "Enable custom Endermite Spawns?");
         MobSpawnsHandler.BeachEndermite = config.getBoolean("Endermite Beach", category + " Endermite", false, "Enable Endermite Beach Spawns?");
@@ -1276,7 +1278,7 @@ public class Config {
         MobSpawnsHandler.EndEndermiteMax = config.getInt("Endermite End Max Group Size", category + " Endermite", 5, 1, Integer.MAX_VALUE, "Endermite End Max Group Size!");
         
         // Ghast
-        config.addCustomCategoryComment(category + " Ghast", "false or false");
+        config.addCustomCategoryComment(category + " Ghast", "true or false");
         // Beach Biome
         MobSpawnsHandler.Ghast = config.getBoolean("Ghast", category + " Ghast", false, "Enable custom Ghast Spawns?");
         MobSpawnsHandler.BeachGhast = config.getBoolean("Ghast Beach", category + " Ghast", false, "Enable Ghast Beach Spawns?");
@@ -1340,7 +1342,7 @@ public class Config {
         MobSpawnsHandler.EndGhastMax = config.getInt("Ghast End Max Group Size", category + " Ghast", 5, 1, Integer.MAX_VALUE, "Ghast End Max Group Size!");
         
         // GiantZombie
-        config.addCustomCategoryComment(category + " GiantZombie", "false or false");
+        config.addCustomCategoryComment(category + " GiantZombie", "true or false");
         // Beach Biome
         MobSpawnsHandler.GiantZombie = config.getBoolean("GiantZombie", category + " GiantZombie", false, "Enable custom GiantZombie Spawns?");
         MobSpawnsHandler.BeachGiantZombie = config.getBoolean("GiantZombie Beach", category + " GiantZombie", false, "Enable GiantZombie Beach Spawns?");
@@ -1404,7 +1406,7 @@ public class Config {
         MobSpawnsHandler.EndGiantZombieMax = config.getInt("GiantZombie End Max Group Size", category + " GiantZombie", 5, 1, Integer.MAX_VALUE, "GiantZombie End Max Group Size!");
         
         // Guardian
-        config.addCustomCategoryComment(category + " Guardian", "false or false");
+        config.addCustomCategoryComment(category + " Guardian", "true or false");
         // Ocean Biome
         MobSpawnsHandler.Guardian = config.getBoolean("Guardian", category + " Guardian", false, "Enable custom Guardian Spawns?");
         MobSpawnsHandler.OceanGuardian = config.getBoolean("Guardian Ocean", category + " Guardian", false, "Enable Guardian Ocean Spawns?");
@@ -1418,7 +1420,7 @@ public class Config {
         MobSpawnsHandler.DeepGuardianMax = config.getInt("Guardian Deep Max Group Size", category + " Guardian", 5, 1, Integer.MAX_VALUE, "Guardian Deep Max Group Size!");
         
         // IronGolem
-        config.addCustomCategoryComment(category + " IronGolem", "false or false");
+        config.addCustomCategoryComment(category + " IronGolem", "true or false");
         // Beach Biome
         MobSpawnsHandler.IronGolem = config.getBoolean("IronGolem", category + " IronGolem", false, "Enable custom IronGolem Spawns?");
         MobSpawnsHandler.BeachIronGolem = config.getBoolean("IronGolem Beach", category + " IronGolem", false, "Enable IronGolem Beach Spawns?");
@@ -1482,7 +1484,7 @@ public class Config {
         MobSpawnsHandler.EndIronGolemMax = config.getInt("IronGolem End Max Group Size", category + " IronGolem", 5, 1, Integer.MAX_VALUE, "IronGolem End Max Group Size!");
         
         // MagmaCube
-        config.addCustomCategoryComment(category + " MagmaCube", "false or false");
+        config.addCustomCategoryComment(category + " MagmaCube", "true or false");
         // Beach Biome
         MobSpawnsHandler.MagmaCube = config.getBoolean("MagmaCube", category + " MagmaCube", false, "Enable custom MagmaCube Spawns?");
         MobSpawnsHandler.BeachMagmaCube = config.getBoolean("MagmaCube Beach", category + " MagmaCube", false, "Enable MagmaCube Beach Spawns?");
@@ -1546,7 +1548,7 @@ public class Config {
         MobSpawnsHandler.EndMagmaCubeMax = config.getInt("MagmaCube End Max Group Size", category + " MagmaCube", 5, 1, Integer.MAX_VALUE, "MagmaCube End Max Group Size!");
         
         // PigZombie
-        config.addCustomCategoryComment(category + " PigZombie", "false or false");
+        config.addCustomCategoryComment(category + " PigZombie", "true or false");
         // Beach Biome
         MobSpawnsHandler.PigZombie = config.getBoolean("PigZombie", category + " PigZombie", false, "Enable custom PigZombie Spawns?");
         MobSpawnsHandler.BeachPigZombie = config.getBoolean("PigZombie Beach", category + " PigZombie", false, "Enable PigZombie Beach Spawns?");
@@ -1610,7 +1612,7 @@ public class Config {
         MobSpawnsHandler.EndPigZombieMax = config.getInt("PigZombie End Max Group Size", category + " PigZombie", 5, 1, Integer.MAX_VALUE, "PigZombie End Max Group Size!");
         
         // PolarBear
-        config.addCustomCategoryComment(category + " PolarBear", "false or false");
+        config.addCustomCategoryComment(category + " PolarBear", "true or false");
         // Beach Biome
         MobSpawnsHandler.PolarBear = config.getBoolean("PolarBear", category + " PolarBear", false, "Enable custom PolarBear Spawns?");
         MobSpawnsHandler.BeachPolarBear = config.getBoolean("PolarBear Beach", category + " PolarBear", false, "Enable PolarBear Beach Spawns?");
@@ -1674,7 +1676,7 @@ public class Config {
         MobSpawnsHandler.EndPolarBearMax = config.getInt("PolarBear End Max Group Size", category + " PolarBear", 5, 1, Integer.MAX_VALUE, "PolarBear End Max Group Size!");
         
         // Shulker
-        config.addCustomCategoryComment(category + " Shulker", "false or false");
+        config.addCustomCategoryComment(category + " Shulker", "true or false");
         // Beach Biome
         MobSpawnsHandler.Shulker = config.getBoolean("Shulker", category + " Shulker", false, "Enable custom Shulker Spawns?");
         MobSpawnsHandler.BeachShulker = config.getBoolean("Shulker Beach", category + " Shulker", false, "Enable Shulker Beach Spawns?");
@@ -1738,7 +1740,7 @@ public class Config {
         MobSpawnsHandler.EndShulkerMax = config.getInt("Shulker End Max Group Size", category + " Shulker", 5, 1, Integer.MAX_VALUE, "Shulker End Max Group Size!");
         
         // Silverfish
-        config.addCustomCategoryComment(category + " Silverfish", "false or false");
+        config.addCustomCategoryComment(category + " Silverfish", "true or false");
         // Beach Biome
         MobSpawnsHandler.Silverfish = config.getBoolean("Silverfish", category + " Silverfish", false, "Enable custom Silverfish Spawns?");
         MobSpawnsHandler.BeachSilverfish = config.getBoolean("Silverfish Beach", category + " Silverfish", false, "Enable Silverfish Beach Spawns?");
@@ -1802,7 +1804,7 @@ public class Config {
         MobSpawnsHandler.EndSilverfishMax = config.getInt("Silverfish End Max Group Size", category + " Silverfish", 5, 1, Integer.MAX_VALUE, "Silverfish End Max Group Size!");
         
         // Skeleton
-        config.addCustomCategoryComment(category + " Skeleton", "false or false");
+        config.addCustomCategoryComment(category + " Skeleton", "true or false");
         // Beach Biome
         MobSpawnsHandler.Skeleton = config.getBoolean("Skeleton", category + " Skeleton", false, "Enable custom Skeleton Spawns?");
         MobSpawnsHandler.BeachSkeleton = config.getBoolean("Skeleton Beach", category + " Skeleton", false, "Enable Skeleton Beach Spawns?");
@@ -1866,7 +1868,7 @@ public class Config {
         MobSpawnsHandler.EndSkeletonMax = config.getInt("Skeleton End Max Group Size", category + " Skeleton", 5, 1, Integer.MAX_VALUE, "Skeleton End Max Group Size!");
         
         // Slime
-        config.addCustomCategoryComment(category + " Slime", "false or false");
+        config.addCustomCategoryComment(category + " Slime", "true or false");
         // Beach Biome
         MobSpawnsHandler.Slime = config.getBoolean("Slime", category + " Slime", false, "Enable custom Slime Spawns?");
         MobSpawnsHandler.BeachSlime = config.getBoolean("Slime Beach", category + " Slime", false, "Enable Slime Beach Spawns?");
@@ -1930,7 +1932,7 @@ public class Config {
         MobSpawnsHandler.EndSlimeMax = config.getInt("Slime End Max Group Size", category + " Slime", 5, 1, Integer.MAX_VALUE, "Slime End Max Group Size!");
         
         // Snowman
-        config.addCustomCategoryComment(category + " Snowman", "false or false");
+        config.addCustomCategoryComment(category + " Snowman", "true or false");
         // Beach Biome
         MobSpawnsHandler.Snowman = config.getBoolean("Snowman", category + " Snowman", false, "Enable custom Snowman Spawns?");
         MobSpawnsHandler.BeachSnowman = config.getBoolean("Snowman Beach", category + " Snowman", false, "Enable Snowman Beach Spawns?");
@@ -1994,7 +1996,7 @@ public class Config {
         MobSpawnsHandler.EndSnowmanMax = config.getInt("Snowman End Max Group Size", category + " Snowman", 5, 1, Integer.MAX_VALUE, "Snowman End Max Group Size!");
         
         // Spider
-        config.addCustomCategoryComment(category + " Spider", "false or false");
+        config.addCustomCategoryComment(category + " Spider", "true or false");
         // Beach Biome
         MobSpawnsHandler.Spider = config.getBoolean("Spider", category + " Spider", false, "Enable custom Spider Spawns?");
         MobSpawnsHandler.BeachSpider = config.getBoolean("Spider Beach", category + " Spider", false, "Enable Spider Beach Spawns?");
@@ -2058,7 +2060,7 @@ public class Config {
         MobSpawnsHandler.EndSpiderMax = config.getInt("Spider End Max Group Size", category + " Spider", 5, 1, Integer.MAX_VALUE, "Spider End Max Group Size!");
         
         // Witch
-        config.addCustomCategoryComment(category + " Witch", "false or false");
+        config.addCustomCategoryComment(category + " Witch", "true or false");
         // Beach Biome
         MobSpawnsHandler.Witch = config.getBoolean("Witch", category + " Witch", false, "Enable custom Witch Spawns?");
         MobSpawnsHandler.BeachWitch = config.getBoolean("Witch Beach", category + " Witch", false, "Enable Witch Beach Spawns?");
@@ -2122,7 +2124,7 @@ public class Config {
         MobSpawnsHandler.EndWitchMax = config.getInt("Witch End Max Group Size", category + " Witch", 5, 1, Integer.MAX_VALUE, "Witch End Max Group Size!");        
         
         // Zombie
-        config.addCustomCategoryComment(category + " Zombie", "false or false");
+        config.addCustomCategoryComment(category + " Zombie", "true or false");
         // Beach Biome
         MobSpawnsHandler.Zombie = config.getBoolean("Zombie", category + " Zombie", false, "Enable custom Zombie Spawns?");
         MobSpawnsHandler.BeachZombie = config.getBoolean("Zombie Beach", category + " Zombie", false, "Enable Zombie Beach Spawns?");
@@ -2202,7 +2204,7 @@ public class Config {
 		category = "Ore Control Modular";
 		
 		// Mob Spawns
-        config.addCustomCategoryComment(category + " Worldgen Options", "false or false");
+        config.addCustomCategoryComment(category + " Worldgen Options", "true or false");
         OreHandler.noAndesite = config.getBoolean("Andesite", category + " Worldgen Options", false, "Disable Ore Generation?");
         OreHandler.noCoal = config.getBoolean("Coal", category + " Worldgen Options", false, "Disable Ore Generation?");
         OreHandler.noCustom = config.getBoolean("Custom", category + " Worldgen Options", false, "Disable Custom Ore Generation? \n(NOTE - Will only work with mods that use OreGenEvent.GenerateMinable event.)");
@@ -2236,7 +2238,7 @@ public class Config {
 		category = "Random Bones Modular";
 		
 		// Mob Spawns
-        config.addCustomCategoryComment(category + " Passive Bone Drops", "false or false");
+        config.addCustomCategoryComment(category + " Passive Bone Drops", "true or false");
         RandomBonesHandler.batBones = config.getBoolean("Bats Bones", category+ " Passive Bone Drops", false, "Drops bones when killed?");
         RandomBonesHandler.chickenBones = config.getBoolean("Chicken Bones", category+ " Passive Bone Drops", false, "Drops bones when killed?");
         RandomBonesHandler.cowBones = config.getBoolean("Cow Bones", category+ " Passive Bone Drops", false, "Drops bones when killed?");
@@ -2249,7 +2251,7 @@ public class Config {
         RandomBonesHandler.wolfBones = config.getBoolean("Wolf Bones", category+ " Passive Bone Drops", false, "Drops bones when killed?");
         
         // Hostile
-        config.addCustomCategoryComment(category + " Hostile Bone Drops", "false or false");
+        config.addCustomCategoryComment(category + " Hostile Bone Drops", "true or false");
         RandomBonesHandler.blazeBones = config.getBoolean("Cave Spider Bones", category+ " Hostile Bone Drops", false, "Drops bones when killed?");
         RandomBonesHandler.caveSpiderBones = config.getBoolean("Cave Spider Bones", category+ " Hostile Bone Drops", false, "Drops bones when killed?");
         RandomBonesHandler.creeperBones = config.getBoolean("Creeper Bones", category+ " Hostile Bone Drops", false, "Drops bones when killed?");
@@ -2288,7 +2290,7 @@ public class Config {
 		category = "Remove Vanilla Items Modular";
 		
 		// Mob Spawns
-        config.addCustomCategoryComment(category + " Remove Recipes", "false or false");
+        config.addCustomCategoryComment(category + " Remove Recipes", "true or false");
         RemoveHandler.woodenTools = config.getBoolean("Wooden Tools", category + " Remove Recipes", false, "Disable?");
         RemoveHandler.stoneTools = config.getBoolean("Stone Tools", category + " Remove Recipes", false, "Disable?");
         RemoveHandler.goldenTools = config.getBoolean("Golden Tools", category + " Remove Recipes", false, "Disable?");
@@ -2315,7 +2317,7 @@ public class Config {
 		category = "Remove Mobs Modular";
 		
 		// Passive
-		config.addCustomCategoryComment(category + " Passive", "false or FALSE");
+		config.addCustomCategoryComment(category + " Passive", "true or false");
 		RemoveMobsHandler.bat = config.getBoolean("Bats", category + " Passive", false, "Disable Mob?");
 		RemoveMobsHandler.chicken = config.getBoolean("Chickens", category + " Passive", false, "Disable Mob?");
 		RemoveMobsHandler.cow = config.getBoolean("Cow", category + " Passive", false, "Disable Mob?");
@@ -2325,14 +2327,14 @@ public class Config {
 		RemoveMobsHandler.squid = config.getBoolean("Squid", category + " Passive", false, "Disable Mob?");
 		RemoveMobsHandler.villager = config.getBoolean("Villager", category + " Passive", false, "Disable Mob?");
 		// Tamable
-		config.addCustomCategoryComment(category + " Tamable", "false or FALSE");
+		config.addCustomCategoryComment(category + " Tamable", "true or false");
 		RemoveMobsHandler.horse = config.getBoolean("Horse", category + " Tamable", false, "Disable Mob?");
 		RemoveMobsHandler.donkey = config.getBoolean("Donkey", category + " Tamable", false, "Disable Mob?");
 		RemoveMobsHandler.mule = config.getBoolean("Mule", category + " Tamable", false, "Disable Mob?");
 		RemoveMobsHandler.ocelot = config.getBoolean("Ocelot", category + " Tamable", false, "Disable Mob?");
 		RemoveMobsHandler.wolf = config.getBoolean("Wolf", category + " Tamable", false, "Disable Mob?");
 		// Neutral
-		config.addCustomCategoryComment(category + " Neutral", "false or FALSE");
+		config.addCustomCategoryComment(category + " Neutral", "true or false");
 		RemoveMobsHandler.ironGolem = config.getBoolean("Iron Golem", category + " Neutral", false, "Disable Mob?");
 		RemoveMobsHandler.snowGolem = config.getBoolean("Snow Golem", category + " Neutral", false, "Disable Mob?");
 		RemoveMobsHandler.spider = config.getBoolean("Spider", category + " Neutral", false, "Disable Mob?");
@@ -2341,7 +2343,7 @@ public class Config {
 		RemoveMobsHandler.zombiePigman = config.getBoolean("Zombie Pigman", category + " Neutral", false, "Disable Mob?");
 		RemoveMobsHandler.polarBear = config.getBoolean("Polar Bear", category + " Neutral", false, "Disable Mob?");
 		// Hostile
-		config.addCustomCategoryComment(category + " Hostile", "false or FALSE");
+		config.addCustomCategoryComment(category + " Hostile", "true or false");
 		RemoveMobsHandler.blaze = config.getBoolean("Blaze", category + " Hostile", false, "Disable Mob?");
 		RemoveMobsHandler.chickenJockey = config.getBoolean("Chicken Jockey", category + " Hostile", false, "Disable Mob?");
 		RemoveMobsHandler.creeper = config.getBoolean("Creeper", category + " Hostile", false, "Disable Mob?");
@@ -2359,7 +2361,7 @@ public class Config {
 		RemoveMobsHandler.shulker = config.getBoolean("Shulker", category + " Hostile", false, "Disable Mob?");
 		RemoveMobsHandler.endermite = config.getBoolean("Endermite", category + " Hostile", false, "Disable Mob?");
 		// Boss
-		config.addCustomCategoryComment(category + " Boss", "false or FALSE");
+		config.addCustomCategoryComment(category + " Boss", "true or false");
 		RemoveMobsHandler.wither = config.getBoolean("Wither", category + " Boss", false, "Disable Mob?");
 		RemoveMobsHandler.elderGuardian = config.getBoolean("Elder Gaurdian", category + " Boss", false, "Disable Mob?");
 		
@@ -2380,7 +2382,7 @@ public class Config {
 		category = "Terrain Control Modular";
 		
 		// Mob Spawns
-        config.addCustomCategoryComment(category + " Worldgen Options", "false or false");
+        config.addCustomCategoryComment(category + " Worldgen Options", "true or false");
         TerrainControlHandler.noBigShroom = config.getBoolean("Big Shrooms", category + " Worldgen Options", false, "Disable Big Shrooms from Generating?");
         TerrainControlHandler.noCactus = config.getBoolean("Cactus", category + " Worldgen Options", false, "Disable Cactus from Generating?");
         TerrainControlHandler.noClay = config.getBoolean("Clay", category + " Worldgen Options", false, "Disable Clay from Generating?");
@@ -2413,7 +2415,7 @@ public class Config {
 		
 		category = "Uncrafting Modular";
 		
-        config.addCustomCategoryComment(category + " Uncrafting Recipes", "false or false");
+        config.addCustomCategoryComment(category + " Uncrafting Recipes", "true or false");
         UncraftingHandler.blaze_powder = config.getBoolean("Blaze Rod", category + " Uncrafting Recipes", false, "Enable Uncrafting Recipe?");
         UncraftingHandler.bowl = config.getBoolean("Bowl", category + " Uncrafting Recipes", false, "Enable Uncrafting Recipe?");
         UncraftingHandler.brick_block = config.getBoolean("Brick Block", category + " Uncrafting Recipes", false, "Enable Uncrafting Recipe?");

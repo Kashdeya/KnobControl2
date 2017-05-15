@@ -82,6 +82,8 @@ public class ServerHandler {
 	
 	// Fall Damage
 	public static boolean FallDamage = false;
+	public static boolean SetFallDamage = false;
+	public static float FallDamageAmount = 10f;
 	
 	// Falling Block
 	public static boolean FallingBlock = false;

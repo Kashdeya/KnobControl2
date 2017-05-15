@@ -57,66 +57,76 @@ public class Server {
 	
 	public static boolean setSpawnDay;
 	
+
+	
 	@SubscribeEvent
 	public void hardcoreEvent(LivingHurtEvent event){
-		if (ModularsHandler.hardcore){
+		if ((event.getEntityLiving() instanceof EntityPlayer) && ModularsHandler.hardcore){
+			
+			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+			
 			if (ServerHandler.airOff){
-				if (event.getSource().equals(DamageSource.drown)) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.drown))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.CactusHurts){
-				if (event.getSource().equals(DamageSource.cactus)) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.cactus))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.dragonBreath){
-				if (event.getSource().equals(DamageSource.dragonBreath)) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.dragonBreath))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.FallDamage) {
-		    	if (event.getSource().equals(DamageSource.fall)) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.fall))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
+			}
+			if (ServerHandler.SetFallDamage) {	
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.fall))) {
+		    		event.setAmount(ServerHandler.FallDamageAmount);
+		    	} 
 		    }
 			if (ServerHandler.FallingBlock) {
-				if (event.getSource().equals(DamageSource.fallingBlock)) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.fallingBlock))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.FoodOverhaul) {
-		    	if (event.getSource().equals(DamageSource.starve)) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.starve))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
 			if (ServerHandler.LavaHurts) {
-		    	if (event.getSource().equals(DamageSource.lava)) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.lava))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
 			if (ServerHandler.witherDeath){
-				if (event.getSource().equals(DamageSource.wither)) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.wither))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if(ServerHandler.inFire){
-				if (event.getSource().equals(DamageSource.inFire)) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.inFire))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.onFire){
-		    	if (event.getSource().equals(DamageSource.onFire)) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.onFire))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
 			if (ServerHandler.inWall){
-		    	if (event.getSource().equals(DamageSource.inWall)) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.inWall))) {
 		    		event.setAmount(0.0F);
 		    	}
 		    }
 			if (ServerHandler.Lightning) {
-		    	if (event.getSource().equals(DamageSource.lightningBolt)) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.lightningBolt))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
@@ -292,7 +302,7 @@ public class Server {
 	public void sleephunger(PlayerWakeUpEvent event){
 	    if ((ServerHandler.SleepHunger) && (!event.updateWorld()) && (!event.getEntityPlayer().capabilities.isCreativeMode) && (!event.getEntityPlayer().isDead) && (!event.getEntityPlayer().worldObj.isRemote)){
 	      World world = event.getEntityPlayer().worldObj;
-	      long sleepTime = 24000L - world.getWorldTime();
+	      long sleepTime = 24000L - world.getTotalWorldTime();
 	      int hungerInterval = 300;
 	      float hungerLoss = Math.round((float)(sleepTime / hungerInterval));
 	      event.getEntityPlayer().getFoodStats().addExhaustion(hungerLoss);
