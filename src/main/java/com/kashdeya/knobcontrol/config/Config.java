@@ -27,7 +27,6 @@ public class Config {
 	public static Configuration config;
 	public static final File configDir = new File("config/Knob Control");	
 	
-	
 	public static void initMain()
 	{
 		
