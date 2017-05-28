@@ -1,5 +1,8 @@
 package com.kashdeya.knobcontrol.modulars;
 
+import com.kashdeya.knobcontrol.handlers.MobSpawnsHandler;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -21,12 +24,8 @@ import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
-
-import com.kashdeya.knobcontrol.handlers.MobSpawnsHandler;
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 
 public class MobSpawns {
 	

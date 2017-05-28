@@ -104,7 +104,7 @@ public class Config {
         // Poison Reduce
         config.addCustomCategoryComment(category + " Poison Control", "true or false");
         ServerHandler.ReducePoison = config.getBoolean("Reduce Poison", category+ " Poison Control", false, "Enable Reduced Poison effect?");
-        ServerHandler.DmgDecrease = config.getFloat("Reduce Poison Damage", category + " Poison Control", 0.05F, 0F, 1F, "Sets the amount of Poison Damage");
+        ServerHandler.DmgDecrease = config.getFloat("Reduce Poison Damage", category + " Poison Control", 0.005F, 0F, 1F, "Sets the amount of Poison Damage");
         
         // Replace poison with slowness
         ServerHandler.CaveSpiderPoison = config.getBoolean("Cave Spiders Apply Weakness", category+ " Poison Control", false, "Enable Weakness effect and remove Poison?");
@@ -2363,7 +2363,6 @@ public class Config {
 		// Boss
 		config.addCustomCategoryComment(category + " Boss", "true or false");
 		RemoveMobsHandler.wither = config.getBoolean("Wither", category + " Boss", false, "Disable Mob?");
-		RemoveMobsHandler.elderGuardian = config.getBoolean("Elder Gaurdian", category + " Boss", false, "Disable Mob?");
 		
 		if (config.hasChanged() == true){
 	        config.save();
