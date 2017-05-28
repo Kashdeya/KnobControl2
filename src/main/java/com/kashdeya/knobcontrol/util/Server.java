@@ -66,67 +66,67 @@ public class Server {
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
 			
 			if (ServerHandler.airOff){
-				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.drown))) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.DROWN))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.CactusHurts){
-				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.cactus))) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.CACTUS))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.dragonBreath){
-				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.dragonBreath))) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.DRAGON_BREATH))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.FallDamage) {
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.fall))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.FALL))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 			}
 			if (ServerHandler.SetFallDamage) {	
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.fall))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.FALL))) {
 		    		event.setAmount(ServerHandler.FallDamageAmount);
 		    	} 
 		    }
 			if (ServerHandler.FallingBlock) {
-				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.fallingBlock))) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.FALLING_BLOCK))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.FoodOverhaul) {
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.starve))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.STARVE))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
 			if (ServerHandler.LavaHurts) {
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.lava))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.LAVA))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
 			if (ServerHandler.witherDeath){
-				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.wither))) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.WITHER))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if(ServerHandler.inFire){
-				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.inFire))) {
+				if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.IN_FIRE))) {
 					event.setAmount(Float.MAX_VALUE);
 				}
 			}
 			if (ServerHandler.onFire){
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.onFire))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.ON_FIRE))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
 			if (ServerHandler.inWall){
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.inWall))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.IN_WALL))) {
 		    		event.setAmount(0.0F);
 		    	}
 		    }
 			if (ServerHandler.Lightning) {
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.lightningBolt))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.LIGHTNING_BOLT))) {
 		    		event.setAmount(Float.MAX_VALUE);
 		    	}
 		    }
@@ -146,7 +146,7 @@ public class Server {
 				EntityPlayer entityPlayer = event.getEntityPlayer();
 				entityPlayer.setSpawnPoint(event.getPos(), false);
 				entityPlayer.setSpawnChunk(event.getPos(), false, event.getEntityPlayer().dimension);
-				entityPlayer.addChatComponentMessage(new TextComponentTranslation("Spawn has been Set!"));
+				entityPlayer.sendMessage(new TextComponentTranslation("Spawn has been Set!"));
 			}
 		}
 	}
@@ -218,7 +218,7 @@ public class Server {
     				Block attached = event.getWorld().getBlockState(posOffset).getBlock();
     				
     				if (!attached.isAir(state, event.getWorld(), posOffset)) {
-    					attached.onBlockActivated(event.getWorld(), posOffset, event.getWorld().getBlockState(posOffset), event.getEntityPlayer(), event.getHand(), held, event.getFace(), 0, 0, 0);
+    					attached.onBlockActivated(event.getWorld(), posOffset, event.getWorld().getBlockState(posOffset), event.getEntityPlayer(), event.getHand(), event.getFace(), 0, 0, 0);
     				}
                 }
             }
@@ -256,7 +256,7 @@ public class Server {
 	public void onLivingUpdate(LivingEvent.LivingUpdateEvent event){
 		if (ServerHandler.NoSwim) {
 			if ((event.getEntity() instanceof EntityPlayer)) {
-				if (event.getEntity().worldObj.isRemote) {
+				if (event.getEntity().getEntityWorld().isRemote) {
 					if (event.getEntity().isInWater()) {
 						if (GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump)) {
 							event.getEntity().motionY -= 0.03D;
@@ -268,12 +268,12 @@ public class Server {
 		
 		if (ServerHandler.featherDrops){
 			EntityChicken chicken;
-			if (event.getEntity().worldObj.isRemote || !(event.getEntity() instanceof EntityChicken))
+			if (event.getEntity().getEntityWorld().isRemote || !(event.getEntity() instanceof EntityChicken))
 				return;
 			chicken = (EntityChicken) event.getEntity();
 			if (chicken.isChild() && ServerHandler.chicksDropFeathers)
 				return;
-			if(chicken.worldObj.rand.nextInt(ServerHandler.dropFreq) == 1)
+			if(chicken.getEntityWorld().rand.nextInt(ServerHandler.dropFreq) == 1)
 			chicken.dropItem(Items.FEATHER, 1);
 		}
 	}
@@ -283,25 +283,25 @@ public class Server {
 		if (ServerHandler.featherDrops){
 			boolean setFeather = false;
 			EntityChicken chicken;
-			if (event.getEntity().worldObj.isRemote || ServerHandler.forceFeatherDrop || !(event.getEntity() instanceof EntityChicken) || !((EntityChicken)event.getEntity()).isChild() && ServerHandler.chicksDropFeathers)
+			if (event.getEntity().getEntityWorld().isRemote || ServerHandler.forceFeatherDrop || !(event.getEntity() instanceof EntityChicken) || !((EntityChicken)event.getEntity()).isChild() && ServerHandler.chicksDropFeathers)
 				return;
 			chicken = (EntityChicken) event.getEntity();
+			boolean hasFeather = false;
 			for (EntityItem item : event.getDrops()) {
-				if (item != null && item.getEntityItem().getItem().equals(Items.FEATHER)) {
+				if (!item.getEntityItem().isEmpty() && item.getEntityItem().getItem().equals(Items.FEATHER)) {
 					setFeather = true;
-					item.getEntityItem().stackSize = MathHelper.getRandomIntegerInRange(item.worldObj.rand, 1, 2);
 				}
 			}
 			if (!setFeather) {
-				event.getDrops().add(new EntityItem(event.getEntity().worldObj, chicken.posX, chicken.posY, chicken.posZ, new ItemStack(Items.FEATHER, MathHelper.getRandomIntegerInRange(event.getEntity().worldObj.rand, 1, 2))));
+				event.getDrops().add(new EntityItem(event.getEntity().getEntityWorld(), chicken.posX, chicken.posY, chicken.posZ, new ItemStack(Items.FEATHER, 1)));
 			}
 		}
 	}
 	
 	@SubscribeEvent
 	public void sleephunger(PlayerWakeUpEvent event){
-	    if ((ServerHandler.SleepHunger) && (!event.updateWorld()) && (!event.getEntityPlayer().capabilities.isCreativeMode) && (!event.getEntityPlayer().isDead) && (!event.getEntityPlayer().worldObj.isRemote)){
-	      World world = event.getEntityPlayer().worldObj;
+	    if ((ServerHandler.SleepHunger) && (!event.updateWorld()) && (!event.getEntityPlayer().capabilities.isCreativeMode) && (!event.getEntityPlayer().isDead) && (!event.getEntityPlayer().getEntityWorld().isRemote)){
+	      World world = event.getEntityPlayer().getEntityWorld();
 	      long sleepTime = 24000L - world.getTotalWorldTime();
 	      int hungerInterval = 300;
 	      float hungerLoss = Math.round((float)(sleepTime / hungerInterval));
@@ -313,7 +313,7 @@ public class Server {
 	public void PlayerHurt(LivingHurtEvent event){
 		if ((event.getEntityLiving() instanceof EntityPlayer) && (ServerHandler.ReducePoison)){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			if ((player.isPotionActive(Potion.getPotionById(19))) && (event.getSource().damageType == DamageSource.magic.getDamageType())) {
+			if ((player.isPotionActive(Potion.getPotionById(19))) && (event.getSource().damageType == DamageSource.MAGIC.getDamageType())) {
 				event.setAmount(ServerHandler.DmgDecrease);
 				}
 			}
@@ -323,7 +323,7 @@ public class Server {
 	public void hungerLoss(LivingEvent.LivingUpdateEvent event){
 	    if (((event.getEntityLiving() instanceof EntityPlayer)) && (ServerHandler.hungerLoss)){
 	      EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-	      if (player.worldObj.isRemote || player.isCreative()) {
+	      if (player.getEntityWorld().isRemote || player.isCreative()) {
 	      }
 	      else{
 	        player.getFoodStats().addExhaustion(ServerHandler.exhaustion);
@@ -336,17 +336,17 @@ public class Server {
 		if(((event.getEntity() instanceof EntityZombie)) && (ServerHandler.BurnBaby)) {
 			EntityZombie zombie = (EntityZombie) event.getEntity();
 
-			if(zombie.worldObj.isDaytime() && !zombie.worldObj.isRemote && zombie.isChild()) {
+			if(zombie.getEntityWorld().isDaytime() && !zombie.getEntityWorld().isRemote && zombie.isChild()) {
 				float f = zombie.getBrightness(1.0F);
 				BlockPos blockpos = zombie.getRidingEntity() instanceof EntityBoat ? new BlockPos(zombie.posX, Math.round(zombie.posY), zombie.posZ).up() : new BlockPos(zombie.posX, Math.round(zombie.posY), zombie.posZ);
 
-				if(f > 0.5F && zombie.worldObj.rand.nextFloat() * 20.0F < (f - 0.4F) * 2.0F && zombie.worldObj.canSeeSky(blockpos)) {
+				if(f > 0.5F && zombie.getEntityWorld().rand.nextFloat() * 20.0F < (f - 0.4F) * 2.0F && zombie.getEntityWorld().canSeeSky(blockpos)) {
 					boolean flag = true;
 					ItemStack itemstack = zombie.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
 					if(itemstack != null) {
 						if(itemstack.isItemStackDamageable()) {
-							itemstack.setItemDamage(itemstack.getItemDamage() + zombie.worldObj.rand.nextInt(2));
+							itemstack.setItemDamage(itemstack.getItemDamage() + zombie.getEntityWorld().rand.nextInt(2));
 
 							if(itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
 								zombie.renderBrokenItemStack(itemstack);
@@ -366,17 +366,17 @@ public class Server {
 		if(((event.getEntity() instanceof EntityBat)) && (ServerHandler.BurnBat)) {
 			EntityBat bat = (EntityBat) event.getEntity();
 
-			if(bat.worldObj.isDaytime() && !bat.worldObj.isRemote) {
+			if(bat.getEntityWorld().isDaytime() && !bat.getEntityWorld().isRemote) {
 				float f = bat.getBrightness(1.0F);
 				BlockPos blockpos = new BlockPos(bat.posX, Math.round(bat.posY), bat.posZ);
 
-				if(f > 0.5F && bat.worldObj.rand.nextFloat() * 20.0F < (f - 0.4F) * 2.0F && bat.worldObj.canSeeSky(blockpos)) {
+				if(f > 0.5F && bat.getEntityWorld().rand.nextFloat() * 20.0F < (f - 0.4F) * 2.0F && bat.getEntityWorld().canSeeSky(blockpos)) {
 					boolean flag = true;
 					ItemStack itemstack = bat.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 
 					if(itemstack != null) {
 						if(itemstack.isItemStackDamageable()) {
-							itemstack.setItemDamage(itemstack.getItemDamage() + bat.worldObj.rand.nextInt(2));
+							itemstack.setItemDamage(itemstack.getItemDamage() + bat.getEntityWorld().rand.nextInt(2));
 
 							if(itemstack.getItemDamage() >= itemstack.getMaxDamage()) {
 								bat.renderBrokenItemStack(itemstack);
@@ -423,7 +423,7 @@ public class Server {
 		if (ServerHandler.netherrackBurn){
 			if (entity.dimension == -1 && entity.ticksExisted % 50 == 0 && !entity.isAirBorne)
 			{
-				World world = entity.worldObj;
+				World world = entity.getEntityWorld();
 				BlockPos entityPos = entity.getPosition();
 				BlockPos ground = new BlockPos(entityPos.getX(), entityPos.getY() - 1, entityPos.getZ());
 				Block block = world.getBlockState(ground).getBlock();
