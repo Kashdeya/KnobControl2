@@ -2,6 +2,9 @@ package com.kashdeya.knobcontrol.modulars;
 
 import java.util.Random;
 
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.TerrainControlHandler;
+
 import net.minecraft.init.Biomes;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -10,9 +13,6 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.TerrainControlHandler;
 
 public class TerrainControl {
 	

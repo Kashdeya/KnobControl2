@@ -1,5 +1,8 @@
 package com.kashdeya.knobcontrol.modulars;
 
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.RemoveDropsHandler;
+
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -22,7 +25,6 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.SkeletonType;
-import net.minecraft.entity.monster.ZombieType;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -37,9 +39,6 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.RemoveDropsHandler;
 
 public class RemoveDrops {
 	

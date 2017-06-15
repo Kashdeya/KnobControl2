@@ -15,4 +15,7 @@ public class ClientHandler {
 	
 	// F3
 	public static boolean f3Off = false;
+	
+	// netherrack
+	public static boolean netherRack = false;
 }

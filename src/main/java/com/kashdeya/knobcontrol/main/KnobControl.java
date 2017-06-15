@@ -26,6 +26,9 @@ import com.kashdeya.knobcontrol.util.Client;
 import com.kashdeya.knobcontrol.util.PotionShift;
 import com.kashdeya.knobcontrol.util.Server;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;

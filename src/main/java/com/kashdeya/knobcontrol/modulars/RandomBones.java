@@ -2,6 +2,9 @@ package com.kashdeya.knobcontrol.modulars;
 
 import java.util.Random;
 
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.RandomBonesHandler;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -32,9 +35,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.RandomBonesHandler;
 
 public class RandomBones {
 	

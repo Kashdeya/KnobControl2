@@ -1,13 +1,13 @@
 package com.kashdeya.knobcontrol.modulars;
 
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.OreHandler;
+
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.OreHandler;
 
 public class OreControl {
 	
