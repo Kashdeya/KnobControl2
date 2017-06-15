@@ -1,17 +1,16 @@
 package com.kashdeya.knobcontrol.util;
 
+import com.kashdeya.knobcontrol.handlers.ClientHandler;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemFood;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.kashdeya.knobcontrol.handlers.ClientHandler;
 
 @SideOnly(Side.CLIENT)
 public class Client {
@@ -54,5 +53,4 @@ public class Client {
 		Minecraft.getMinecraft().gameSettings.showDebugInfo = false;
 		}
 	}
-
 }

@@ -2,8 +2,6 @@ package com.kashdeya.knobcontrol.config;
 
 import java.io.File;
 
-import net.minecraftforge.common.config.Configuration;
-
 import com.kashdeya.knobcontrol.handlers.ClientHandler;
 import com.kashdeya.knobcontrol.handlers.CraftingHandler;
 import com.kashdeya.knobcontrol.handlers.EventsHandler;
@@ -21,6 +19,8 @@ import com.kashdeya.knobcontrol.handlers.ServerHandler;
 import com.kashdeya.knobcontrol.handlers.TerrainControlHandler;
 import com.kashdeya.knobcontrol.handlers.UncraftingHandler;
 import com.kashdeya.knobcontrol.modulars.Furnace;
+
+import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 	
@@ -74,6 +74,7 @@ public class Config {
         // GameRules
         config.addCustomCategoryComment(category + " GameRules", "true or false");
         ServerHandler.keepInvo = config.getBoolean("Keep Inventory", category + " GameRules", false, "Allow players to keep inventory on death?");
+        ServerHandler.keepXP = config.getBoolean("Keep XP", category + " GameRules", false, "Allow players to Keep XP after Death?");
         ServerHandler.regenOff = config.getBoolean("Natural Regeneration", category+ " GameRules", false, "Disable Natural Regeneration?");
         ServerHandler.lightCycle = config.getBoolean("Day-Night Cycle", category + " GameRules", false, "Disable Day-Night Cycle?");
         ServerHandler.fireTick = config.getBoolean("Fire Tick", category + " GameRules", false, "Disable Whether fire should spread and naturally extinguishe?");
@@ -104,7 +105,7 @@ public class Config {
         // Poison Reduce
         config.addCustomCategoryComment(category + " Poison Control", "true or false");
         ServerHandler.ReducePoison = config.getBoolean("Reduce Poison", category+ " Poison Control", false, "Enable Reduced Poison effect?");
-        ServerHandler.DmgDecrease = config.getFloat("Reduce Poison Damage", category + " Poison Control", 0.005F, 0F, 1F, "Sets the amount of Poison Damage");
+        ServerHandler.DmgDecrease = config.getFloat("Reduce Poison Damage", category + " Poison Control", 1F, 1F, 20F, "Sets the amount of Poison Damage");
         
         // Replace poison with slowness
         ServerHandler.CaveSpiderPoison = config.getBoolean("Cave Spiders Apply Weakness", category+ " Poison Control", false, "Enable Weakness effect and remove Poison?");
@@ -126,6 +127,11 @@ public class Config {
         // Wither
         config.addCustomCategoryComment(category + " Wither", "true or false");
         EventsHandler.witherSpawn = config.getBoolean("Wither Spawn", category + " Wither", false, "Enable Wither spawning only in the Nether?");
+        
+        // Skeletons Sink
+        config.addCustomCategoryComment(category + " MISC Mob Options", "true or false");
+        ServerHandler.SkeletonNoSwim = config.getBoolean("No Swim", category + "  MISC Mob Options", false, "Disable Skeleton Swim?");
+        ServerHandler.stopEnderman = config.getBoolean("No Enderman", category + "  MISC Mob Options", false, "Disable Enderman Teleporting?");
         
 		if (config.hasChanged() == true){
         config.save();
@@ -919,27 +925,36 @@ public class Config {
 		
 		// Mob Spawns
         config.addCustomCategoryComment(category + " Hardcore Options", "true or false");
-        ServerHandler.airOff = config.getBoolean("Instant Drown", category + " Hardcore Options", false, "Instant death when you run out of air?");
-        ServerHandler.LavaHurts = config.getBoolean("Lava Kills", category + " Hardcore Options", false, "Lava Kills Player?");
+        ServerHandler.airOff = config.getBoolean("Drowning Damage", category + " Hardcore Options", false, "Instant death when you run out of air?");
+        ServerHandler.airOffDamageAmount = config.getFloat("Drowning Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Drowning does to Player!\n(1=Half Heart)");
+        ServerHandler.LavaHurts = config.getBoolean("Lava Damage", category + " Hardcore Options", false, "Lava Kills Player?");
+        ServerHandler.LavaHurtsDamageAmount = config.getFloat("Lava Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Lava does to Player!\n(1=Half Heart)");
         ServerHandler.NoSwim = config.getBoolean("No Swim", category + " Hardcore Options", false, "Disable Player Swim?");
-        ServerHandler.CactusHurts = config.getBoolean("Cactus Kills", category + " Hardcore Options", false, "Cactus Kills Player?");
+        ServerHandler.CactusHurts = config.getBoolean("Cactus Damage", category + " Hardcore Options", false, "Cactus Kills Player?");
+        ServerHandler.CactusHurtsDamageAmount = config.getFloat("Cactus Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Cactus does to Player!\n(1=Half Heart)");
         ServerHandler.FallDamage = config.getBoolean("Fall Damage", category + " Hardcore Options", false, "Fall Damage kills Player?");
-        ServerHandler.SetFallDamage = config.getBoolean("Fall Damage Custom", category + " Hardcore Options", false, "Fall Damage kills Player?\n(Can not be used if Fall Damage is true!)");
-        ServerHandler.FallDamageAmount = config.getFloat("Fall Damage Custom Amount", category + " Hardcore Options", 10F, 0F, 20F, "Sets the amount of Damage Falling does to Player!");
-        ServerHandler.FallingBlock = config.getBoolean("Falling Blocks", category + " Hardcore Options", false, "Falling Blocks kills Player?");
+        ServerHandler.FallDamageAmount = config.getFloat("Fall Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Falling does to Player!\n(1=Half Heart)");
+        ServerHandler.FallingBlock = config.getBoolean("Falling Blocks Damage", category + " Hardcore Options", false, "Falling Blocks kills Player?");
+        ServerHandler.FallingBlockDamageAmount = config.getFloat("Falling Blocks Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Falling  Blocks does to Player!\n(1=Half Heart)");
         ServerHandler.FoodOverhaul = config.getBoolean("Food Overhaul", category + " Hardcore Options", false, "Player Starves to Death if they don't eat?");
+        ServerHandler.FoodOverhaulDamageAmount = config.getFloat("Food Overhaul Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Falling does to Player!\n(1=Half Heart)");
         ServerHandler.SleepHunger = config.getBoolean("Sleep Hunger", category + " Hardcore Options", false, "Do Players get hungery when they sleep?");
         ServerHandler.hungerLoss = config.getBoolean("Hunger Loss", category+ " Hardcore Options", false, "Enable Hunger Loss?");
-        ServerHandler.exhaustion = config.getFloat("Hunger Loss Amount", category + " Hardcore Options", 0.005F, 0.001F, 1.0F, "Sets the amount of Hunger Loss");
-        ServerHandler.inFire = config.getBoolean("Fire Kills", category+ " Hardcore Options", false, "Stepping into fire Kills you?");
-        ServerHandler.onFire = config.getBoolean("On Fire Kills", category+ " Hardcore Options", false, "Being on fire Kills you?");
-        ServerHandler.witherDeath = config.getBoolean("Wither Effect", category+ " Hardcore Options", false, "Wither Effect Kills you?");
-        ServerHandler.dragonBreath = config.getBoolean("Dragon Breath", category+ " Hardcore Options", false, "Dragon Breath Kills you?");
-        ServerHandler.Lightning = config.getBoolean("Lightning Strikes", category+ " Hardcore Options", false, "Lightning Strikes Kills you?");
+        ServerHandler.exhaustion = config.getFloat("Hunger Loss Amount", category + " Hardcore Options", 1F, 1F, 20F, "Sets the amount of Hunger Loss");
+        ServerHandler.inFire = config.getBoolean("In Fire Damage", category+ " Hardcore Options", false, "Stepping into fire Kills you?");
+        ServerHandler.inFireDamageAmount = config.getFloat("In Fire Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage being In Fire does to Player!\n(1=Half Heart)");
+        ServerHandler.onFire = config.getBoolean("On Fire Damage", category+ " Hardcore Options", false, "Being on fire Kills you?");
+        ServerHandler.onFireDamageAmount = config.getFloat("On Fire Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage being On Fire does to Player!\n(1=Half Heart)");
+        ServerHandler.witherDeath = config.getBoolean("Wither Effect Damage", category+ " Hardcore Options", false, "Wither Effect Kills you?");
+        ServerHandler.witherDeathDamageAmount = config.getFloat("Wither Effect Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Wither Effect does to Player!\n(1=Half Heart)");
+        ServerHandler.dragonBreath = config.getBoolean("Dragon Breath Damage", category+ " Hardcore Options", false, "Dragon Breath Kills you?");
+        ServerHandler.dragonBreathDamageAmount = config.getFloat("Dragon Breath Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Dragon Breath does to Player!\n(1=Half Heart)");
+        ServerHandler.Lightning = config.getBoolean("Lightning Damage", category+ " Hardcore Options", false, "Lightning Strikes Kills you?");
+        ServerHandler.LightningDamageAmount = config.getFloat("Lightning Damage Amount", category + " Hardcore Options", 20F, 1F, 20F, "Sets the amount of Damage Lightning does to Player!\n(1=Half Heart)");
         ServerHandler.netherrackBurn = config.getBoolean("Netherrack Burn", category+ " Hardcore Options", false, "Disable Netherrack Burning Players?");
         ServerHandler.burnTime = config.getInt("Netherrack Burn Time", category + " Hardcore Options", 2, 1, 300, "Amount of Seconds the player burns for!");
         ServerHandler.pigmanAngry = config.getBoolean("Angry Pigman", category+ " Hardcore Options", false, "Enable Angry Pigman?");
-        ServerHandler.pigmanAngryChance = config.getInt("Angry Pigman Chance", category + " Hardcore Options", 1, 1, 100, "chance (1 in amount) to make Zombie Pigmen angry if the player destroys blocks");
+        ServerHandler.pigmanAngryChance = config.getInt("Angry Pigman Chance", category + " Hardcore Options", 100, 1, 100, "chance (1 in amount) to make Zombie Pigmen angry if the player destroys blocks");
         
 		if (config.hasChanged() == true){
 	        config.save();
@@ -2363,6 +2378,7 @@ public class Config {
 		// Boss
 		config.addCustomCategoryComment(category + " Boss", "true or false");
 		RemoveMobsHandler.wither = config.getBoolean("Wither", category + " Boss", false, "Disable Mob?");
+		RemoveMobsHandler.elderGuardian = config.getBoolean("Elder Gaurdian", category + " Boss", false, "Disable Mob?");
 		
 		if (config.hasChanged() == true){
 	        config.save();

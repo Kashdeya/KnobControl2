@@ -1,13 +1,13 @@
 package com.kashdeya.knobcontrol.modulars;
 
+import com.kashdeya.knobcontrol.handlers.FurnaceHandler;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
-
-import com.kashdeya.knobcontrol.handlers.FurnaceHandler;
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 
 public class Furnace implements IFuelHandler {
 	

@@ -1,9 +1,9 @@
 package com.kashdeya.knobcontrol.modulars;
 
-import net.minecraft.init.Items;
-
 import com.kashdeya.knobcontrol.handlers.ItemStackHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+
+import net.minecraft.init.Items;
 
 public class ItemStacks {
 	

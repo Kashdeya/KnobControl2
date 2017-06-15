@@ -22,9 +22,8 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -131,23 +130,35 @@ public class RemoveMobs {
 			else if(event.getEntity() instanceof EntityShulker && RemoveMobsHandler.shulker){
 				event.setCanceled(true);
 			}
-			else if(event.getEntity() instanceof EntityGuardian && RemoveMobsHandler.guardian){
+			else if(event.getEntity() instanceof EntityGuardian){
+				EntityGuardian guardian = (EntityGuardian)event.getEntity();
+				if(guardian.isElder() == false && RemoveMobsHandler.guardian){
 					event.setCanceled(true);
+				}
+				else if(guardian.isElder() && RemoveMobsHandler.elderGuardian){
+					event.setCanceled(true);
+				}
 			}
 			else if(event.getEntity() instanceof EntityWitch && RemoveMobsHandler.witch){
 				event.setCanceled(true);
 			}
-			else if(event.getEntity() instanceof EntitySkeleton && RemoveMobsHandler.skeleton){
+			else if(event.getEntity() instanceof EntitySkeleton){
+				EntitySkeleton skeleton = (EntitySkeleton)event.getEntity();
+				if(skeleton.getSkeletonType()== SkeletonType.NORMAL && RemoveMobsHandler.skeleton){
 					event.setCanceled(true);
+				}
+				else if(skeleton.getSkeletonType()== SkeletonType.WITHER && RemoveMobsHandler.witherSkeleton){
+					event.setCanceled(true);
+				}
 			}
-			else if(event.getEntity() instanceof EntityWitherSkeleton && RemoveMobsHandler.witherSkeleton){
+			else if(event.getEntity() instanceof EntityZombie){
+				EntityZombie zombie = (EntityZombie)event.getEntity();
+				if(zombie.isVillager() && RemoveMobsHandler.zombieVillager){
 					event.setCanceled(true);
-			}
-			else if(event.getEntity() instanceof EntityZombie && RemoveMobsHandler.zombie){
+				}
+				else if(RemoveMobsHandler.zombie) {
 					event.setCanceled(true);
-			}
-			else if(event.getEntity() instanceof EntityZombieVillager && RemoveMobsHandler.zombieVillager) {
-					event.setCanceled(true);
+				}
 			}
 			else if(event.getEntity() instanceof EntityWither && RemoveMobsHandler.wither){
 				event.setCanceled(true);

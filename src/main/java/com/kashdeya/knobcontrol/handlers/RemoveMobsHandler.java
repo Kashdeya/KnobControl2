@@ -50,4 +50,5 @@ public class RemoveMobsHandler {
 		
 	// Boss
 	public static boolean wither = false;
+	public static boolean elderGuardian = false;
 }

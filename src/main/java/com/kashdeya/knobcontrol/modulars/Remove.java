@@ -2,15 +2,13 @@ package com.kashdeya.knobcontrol.modulars;
 
 import java.util.ArrayList;
 
-import net.minecraft.init.Blocks;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.RemoveHandler;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.kashdeya.knobcontrol.handlers.ModularsHandler;
-import com.kashdeya.knobcontrol.handlers.RemoveHandler;
 
 public class Remove {
 	
