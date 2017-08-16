@@ -43,7 +43,7 @@ public class RandomBones {
 	@SubscribeEvent
 	  public void onEntityDrop(LivingDropsEvent event){
 		  if (ModularsHandler.randomBones){
-			  if ((event.getSource().getEntity() instanceof EntityPlayer)) {
+			  if ((event.getEntity() instanceof EntityPlayer)) {
 				  if (event.getEntityLiving() != null){
 					  EntityLivingBase entity = event.getEntityLiving();
 					  if(

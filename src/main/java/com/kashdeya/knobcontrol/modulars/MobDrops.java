@@ -9,21 +9,23 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class MobDrops 
 {
 
 	// Key: MobID
 	// Done
-	public static final HashMap<String, ArrayList<ItemDrop>> MOB_DROP_LIST = new HashMap<String, ArrayList<ItemDrop>>();
-	public static final HashMap<String, ArrayList<ItemDrop>> MOB_DROP_LIST_PLAYER_KILL = new HashMap<String, ArrayList<ItemDrop>>();
+	public static final HashMap<ResourceLocation, ArrayList<ItemDrop>> MOB_DROP_LIST = new HashMap<ResourceLocation, ArrayList<ItemDrop>>();
+	public static final HashMap<ResourceLocation, ArrayList<ItemDrop>> MOB_DROP_LIST_PLAYER_KILL = new HashMap<ResourceLocation, ArrayList<ItemDrop>>();
 	
 	
 	// Run this on post loading so that way all entities and items should already be loaded into the game.
@@ -34,19 +36,19 @@ public class MobDrops
 		MOB_DROP_LIST.clear();
 		MOB_DROP_LIST_PLAYER_KILL.clear();
 		
-		for(Entry<String, Class<? extends Entity>> entity : EntityList.NAME_TO_CLASS.entrySet())
+		for(Entry<ResourceLocation, EntityEntry> entity : ForgeRegistries.ENTITIES.getEntries())
 		{
 			
-			Class<? extends Entity> clazz = entity.getValue();
+			Class<? extends Entity> clazz = entity.getValue().getEntityClass();
 			
 			// Checks if its based of EntityLivingBase
 			if(EntityLivingBase.class.isAssignableFrom(clazz))
 			{
-				config.addCustomCategoryComment(entity.getKey(), "Adding Drops Example: \nModID:Item:Meta:Qty(Random 1 - number set):Chance(0.01 - 1) \nminecraft:glass:0:15:1 ");
+				config.addCustomCategoryComment(entity.getKey().toString(), "Adding Drops Example: \nModID:Item:Meta:Qty(Random 1 - number set):Chance(0.01 - 1) \nminecraft:glass:0:15:1 ");
 				
-				MOB_DROP_LIST.put(entity.getKey(), ItemDrop.getArrayItemDrops(config.get(entity.getKey(), "drops", new String[0]).getStringList()));
+				MOB_DROP_LIST.put(entity.getKey(), ItemDrop.getArrayItemDrops(config.get(entity.getKey().toString(), "drops", new String[0]).getStringList()));
 				
-				MOB_DROP_LIST_PLAYER_KILL.put(entity.getKey(), ItemDrop.getArrayItemDrops(config.get(entity.getKey(), "player kill drops", new String[0]).getStringList()));
+				MOB_DROP_LIST_PLAYER_KILL.put(entity.getKey(), ItemDrop.getArrayItemDrops(config.get(entity.getKey().toString(), "player kill drops", new String[0]).getStringList()));
 				
 			}
 		}
@@ -66,9 +68,9 @@ public class MobDrops
 
 		
 		//Any mob death.
-		if(MOB_DROP_LIST.containsKey(EntityList.getEntityString(entityliving)))
+		if(MOB_DROP_LIST.containsKey(EntityList.getKey(entityliving.getClass())))
 		{
-			for(ItemDrop drop : MOB_DROP_LIST.get(EntityList.getEntityString(entityliving)))
+			for(ItemDrop drop : MOB_DROP_LIST.get(EntityList.getKey(entityliving.getClass())))
 			{
 				if(drop.shouldDrop(entityliving.getRNG()))
 				{
@@ -82,9 +84,9 @@ public class MobDrops
 		// Player only kills
 		if(isPlayerKill(event.getSource()))
 		{
-			if(MOB_DROP_LIST_PLAYER_KILL.containsKey(EntityList.getEntityString(entityliving)))
+			if(MOB_DROP_LIST_PLAYER_KILL.containsKey(EntityList.getKey(entityliving.getClass())))
 			{
-				for(ItemDrop drop : MOB_DROP_LIST_PLAYER_KILL.get(EntityList.getEntityString(entityliving)))
+				for(ItemDrop drop : MOB_DROP_LIST_PLAYER_KILL.get(EntityList.getKey(entityliving.getClass())))
 				{
 					if(drop.shouldDrop(entityliving.getRNG()))
 					{
@@ -106,13 +108,7 @@ public class MobDrops
 	 */
 	private boolean isPlayerKill(DamageSource source)
 	{
-		if(source.getSourceOfDamage() instanceof EntityArrow)
-		{
-			return ((EntityArrow)source.getSourceOfDamage()).shootingEntity instanceof EntityPlayer; 
-		}else
-		{
-			return source.getEntity() instanceof EntityPlayer;
-		}
+		return source.getTrueSource() instanceof EntityPlayer;
 	}
 	
 	

@@ -1,6 +1,9 @@
 package com.kashdeya.knobcontrol.modulars;
 
-import java.util.ArrayList;
+import com.kashdeya.knobcontrol.handlers.CraftingHandler;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.ServerHandler;
+import com.kashdeya.knobcontrol.util.Recipes;
 
 import com.kashdeya.knobcontrol.handlers.CraftingHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
@@ -9,65 +12,65 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Crafting {
 	
 	public static void registerRecipes(){
-		
+	    if(ServerHandler.melonDrop){
+	        ItemStack block = new ItemStack(Blocks.MELON_BLOCK, 1);
+	        Recipes.addShapelessRecipe(new ItemStack(Items.MELON, 4), block);
+	    }
+	    
 		if (ModularsHandler.crafting){
 			if (CraftingHandler.oldHorse){
-				GameRegistry.addShapedRecipe(new ItemStack(Items.IRON_HORSE_ARMOR), new Object[] {"  H", "IWI", "L L", 'W', new ItemStack(Blocks.WOOL), 'I', new ItemStack(Items.IRON_INGOT), 'H', new ItemStack(Items.IRON_HELMET), 'L', new ItemStack(Items.IRON_LEGGINGS)});
-				GameRegistry.addShapedRecipe(new ItemStack(Items.GOLDEN_HORSE_ARMOR), new Object[] {"  H", "GWG", "L L", 'W', new ItemStack(Blocks.WOOL), 'G', new ItemStack(Items.GOLD_INGOT), 'H', new ItemStack(Items.GOLDEN_HELMET), 'L', new ItemStack(Items.GOLDEN_LEGGINGS)});
-				GameRegistry.addShapedRecipe(new ItemStack(Items.DIAMOND_HORSE_ARMOR), new Object[] {"  H", "DWD", "L L", 'W', new ItemStack(Blocks.WOOL), 'D', new ItemStack(Items.DIAMOND), 'H', new ItemStack(Items.DIAMOND_HELMET), 'L', new ItemStack(Items.DIAMOND_LEGGINGS)});
+			    Recipes.addShapedRecipe(new ItemStack(Items.IRON_HORSE_ARMOR), new Object[] {"  H", "IWI", "L L", 'W', new ItemStack(Blocks.WOOL), 'I', new ItemStack(Items.IRON_INGOT), 'H', new ItemStack(Items.IRON_HELMET), 'L', new ItemStack(Items.IRON_LEGGINGS)});
+			    Recipes.addShapedRecipe(new ItemStack(Items.GOLDEN_HORSE_ARMOR), new Object[] {"  H", "GWG", "L L", 'W', new ItemStack(Blocks.WOOL), 'G', new ItemStack(Items.GOLD_INGOT), 'H', new ItemStack(Items.GOLDEN_HELMET), 'L', new ItemStack(Items.GOLDEN_LEGGINGS)});
+			    Recipes.addShapedRecipe(new ItemStack(Items.DIAMOND_HORSE_ARMOR), new Object[] {"  H", "DWD", "L L", 'W', new ItemStack(Blocks.WOOL), 'D', new ItemStack(Items.DIAMOND), 'H', new ItemStack(Items.DIAMOND_HELMET), 'L', new ItemStack(Items.DIAMOND_LEGGINGS)});
 			}
 			
 			if (CraftingHandler.xpBottle){
-				GameRegistry.addShapedRecipe(new ItemStack(Items.EXPERIENCE_BOTTLE), new Object[] {"rrr", "rsr", "rrr", 'r', new ItemStack(Items.GOLD_NUGGET), 's', new ItemStack(Items.GLASS_BOTTLE)});
+				Recipes.addShapedRecipe(new ItemStack(Items.EXPERIENCE_BOTTLE), new Object[] {"rrr", "rsr", "rrr", 'r', new ItemStack(Items.GOLD_NUGGET), 's', new ItemStack(Items.GLASS_BOTTLE)});
 			}
 			
 			if (CraftingHandler.grassPath){
-				GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.WOODEN_SHOVEL)});
-				GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.STONE_SHOVEL)});
-				GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.IRON_SHOVEL)});
-				GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.GOLDEN_SHOVEL)});
-				GameRegistry.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.DIAMOND_SHOVEL)});
+				Recipes.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.WOODEN_SHOVEL)});
+				Recipes.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.STONE_SHOVEL)});
+				Recipes.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.IRON_SHOVEL)});
+				Recipes.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.GOLDEN_SHOVEL)});
+				Recipes.addShapelessRecipe(new ItemStack(Blocks.GRASS_PATH), new Object[] {new ItemStack(Blocks.GRASS), new ItemStack(Items.DIAMOND_SHOVEL)});
 			}
 			
 			if (CraftingHandler.barrierBlock){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.BARRIER, 64), new Object[] {"rrr", "rsr", "rrr", 'r', new ItemStack(Blocks.GLASS, 0, 14), 's', new ItemStack(Items.NETHER_STAR)});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.BARRIER, 64), new Object[] {"rrr", "rsr", "rrr", 'r', new ItemStack(Blocks.GLASS, 0, 14), 's', new ItemStack(Items.NETHER_STAR)});
 			}
 			
 			if (CraftingHandler.myceliumOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.MYCELIUM, 5), new Object[] {"DBD", "BDB", "DBD", 'B', new ItemStack(Blocks.BROWN_MUSHROOM), 'D', new ItemStack(Blocks.GRASS)});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.MYCELIUM, 5), new Object[] {"DBD", "BDB", "DBD", 'B', new ItemStack(Blocks.BROWN_MUSHROOM), 'D', new ItemStack(Blocks.GRASS)});
 			}
 			
 			if (CraftingHandler.grassOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.GRASS), new Object[] {"B", "S", "D", 'B', new ItemStack(Items.DYE, 1, 15), 'S', new ItemStack(Items.WHEAT_SEEDS), 'D', new ItemStack(Blocks.DIRT)});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.GRASS), new Object[] {"B", "S", "D", 'B', new ItemStack(Items.DYE, 1, 15), 'S', new ItemStack(Items.WHEAT_SEEDS), 'D', new ItemStack(Blocks.DIRT)});
 			}
 			
 			if (CraftingHandler.dustOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Items.GLOWSTONE_DUST,4), new Object[] {"GRG", "RGR", "GRG", 'G', new ItemStack(Items.GOLD_NUGGET), 'R', new ItemStack(Items.REDSTONE)});
+				Recipes.addShapedRecipe(new ItemStack(Items.GLOWSTONE_DUST,4), new Object[] {"GRG", "RGR", "GRG", 'G', new ItemStack(Items.GOLD_NUGGET), 'R', new ItemStack(Items.REDSTONE)});
 			}
 			
 			if (CraftingHandler.flintOff){
-				GameRegistry.addShapelessRecipe(new ItemStack(Items.FLINT), new Object[] {new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL)});
+				Recipes.addShapelessRecipe(new ItemStack(Items.FLINT), new Object[] {new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL), new ItemStack(Blocks.GRAVEL)});
 			}
 			
 			if (CraftingHandler.appleOff){
-				GameRegistry.addRecipe(new ItemStack(Items.GOLDEN_APPLE, 1, 1), "ggg", "gag", "ggg", 'g', new ItemStack(Blocks.GOLD_BLOCK), 'a', new ItemStack(Items.APPLE));
+				Recipes.addShapedRecipe(new ItemStack(Items.GOLDEN_APPLE, 1, 1), "ggg", "gag", "ggg", 'g', new ItemStack(Blocks.GOLD_BLOCK), 'a', new ItemStack(Items.APPLE));
 			}
 			
 			if (CraftingHandler.endstoneOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.END_STONE), new Object[] {"CCC", "CEC", "CCC", 'E', Items.ENDER_PEARL,'C', Blocks.SANDSTONE});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.END_STONE), new Object[] {"CCC", "CEC", "CCC", 'E', Items.ENDER_PEARL,'C', Blocks.SANDSTONE});
 			}
 			
 			if (CraftingHandler.coarseOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.DIRT,8), new Object[] {"CCC", "CBC", "CCC", 'C', new ItemStack(Blocks.DIRT, 1, 1), 'B', new ItemStack(Items.WATER_BUCKET)});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.DIRT,8), new Object[] {"CCC", "CBC", "CCC", 'C', new ItemStack(Blocks.DIRT, 1, 1), 'B', new ItemStack(Items.WATER_BUCKET)});
 			}
 			
 			if (CraftingHandler.leatherOff){
@@ -75,52 +78,50 @@ public class Crafting {
 			}
 			
 			if (CraftingHandler.nametagOff){
-				GameRegistry.addShapelessRecipe(new ItemStack(Items.NAME_TAG), new Object[] {Items.PAPER, Items.PAPER, Items.STRING});
+				Recipes.addShapelessRecipe(new ItemStack(Items.NAME_TAG), new Object[] {Items.PAPER, Items.PAPER, Items.STRING});
 			}
 			
 			if (CraftingHandler.newHorse){
-				GameRegistry.addShapedRecipe(new ItemStack(Items.IRON_HORSE_ARMOR), new Object[] {"  I", "ISI", "I I", 'S', Items.SADDLE, 'I', Items.IRON_INGOT});
-				GameRegistry.addShapedRecipe(new ItemStack(Items.GOLDEN_HORSE_ARMOR), new Object[] {"  G", "GSG", "G G", 'S', Items.SADDLE, 'G', Items.GOLD_INGOT});
-				GameRegistry.addShapedRecipe(new ItemStack(Items.DIAMOND_HORSE_ARMOR), new Object[] {"  D", "DSD", "D D", 'S', Items.SADDLE, 'D', Items.DIAMOND});
+				Recipes.addShapedRecipe(new ItemStack(Items.IRON_HORSE_ARMOR), new Object[] {"  I", "ISI", "I I", 'S', Items.SADDLE, 'I', Items.IRON_INGOT});
+				Recipes.addShapedRecipe(new ItemStack(Items.GOLDEN_HORSE_ARMOR), new Object[] {"  G", "GSG", "G G", 'S', Items.SADDLE, 'G', Items.GOLD_INGOT});
+				Recipes.addShapedRecipe(new ItemStack(Items.DIAMOND_HORSE_ARMOR), new Object[] {"  D", "DSD", "D D", 'S', Items.SADDLE, 'D', Items.DIAMOND});
 			}
 			
 			if (CraftingHandler.saddleOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Items.SADDLE), new Object[] {"LLL", "LIL", "I I", 'L', Items.LEATHER, 'I', Items.IRON_INGOT});
+				Recipes.addShapedRecipe(new ItemStack(Items.SADDLE), new Object[] {"LLL", "LIL", "I I", 'L', Items.LEATHER, 'I', Items.IRON_INGOT});
 			}
 			
 			if (CraftingHandler.spongeOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.SPONGE), new Object[] {"WWW", "WBW", "WWW", 'W', Blocks.WOOL, 'B', Items.WATER_BUCKET});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.SPONGE), new Object[] {"WWW", "WBW", "WWW", 'W', Blocks.WOOL, 'B', Items.WATER_BUCKET});
 			}
 			
 			if (CraftingHandler.cobwebOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.WEB), new Object[] {"SSS", "SBS", "SSS", 'S', Items.STRING, 'B', Items.SLIME_BALL});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.WEB), new Object[] {"SSS", "SBS", "SSS", 'S', Items.STRING, 'B', Items.SLIME_BALL});
 			}
 			
 			if (CraftingHandler.iceOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.ICE), new Object[] {"SSS", "SBS", "SSS", 'S', Items.SNOWBALL, 'B', Items.WATER_BUCKET});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.ICE), new Object[] {"SSS", "SBS", "SSS", 'S', Items.SNOWBALL, 'B', Items.WATER_BUCKET});
 			}
 			
 			if (CraftingHandler.packedOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.PACKED_ICE), new Object[] {"II", "II", 'I', Blocks.ICE});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.PACKED_ICE), new Object[] {"II", "II", 'I', Blocks.ICE});
 			}
 			
 			if (CraftingHandler.slabOff){
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.COBBLESTONE), new Object[] {"S", "S", 'S', new ItemStack(Blocks.STONE_SLAB, 1, 3)});
+				Recipes.addShapedRecipe(new ItemStack(Blocks.COBBLESTONE), new Object[] {"S", "S", 'S', new ItemStack(Blocks.STONE_SLAB, 1, 3)});
 			}
 			
 			if (CraftingHandler.chestOff){
-				IRecipe chestRecipe = new ShapedOreRecipe(new ItemStack(Blocks.CHEST, 4), new Object[] {"LLL", "L L", "LLL", 'L', "logWood"});
-				GameRegistry.addRecipe(chestRecipe);			
+				Recipes.addShapedRecipe(new ItemStack(Blocks.CHEST, 4), new Object[] {"LLL", "L L", "LLL", 'L', "logWood"});			
 			}
 			
 			if (CraftingHandler.clayOff){
-				GameRegistry.addShapelessRecipe(new ItemStack(Item.getItemFromBlock(Blocks.CLAY), 2), new ItemStack(Items.WATER_BUCKET),new ItemStack(Item.getItemFromBlock(Blocks.SAND)),new ItemStack(Item.getItemFromBlock(Blocks.GRAVEL)));
-				IRecipe clayRecipe = new ShapelessOreRecipe(new ItemStack(Items.CLAY_BALL, 4), new Object[] {new ItemStack(Blocks.CLAY)});
-				GameRegistry.addRecipe(clayRecipe);
+				Recipes.addShapelessRecipe(new ItemStack(Item.getItemFromBlock(Blocks.CLAY), 2), new ItemStack(Items.WATER_BUCKET),new ItemStack(Item.getItemFromBlock(Blocks.SAND)),new ItemStack(Item.getItemFromBlock(Blocks.GRAVEL)));
+				Recipes.addShapelessRecipe(new ItemStack(Items.CLAY_BALL, 4), new Object[] {new ItemStack(Blocks.CLAY)});
 			}
 			
 			if (CraftingHandler.coal2charcoal){
-				GameRegistry.addShapelessRecipe(new ItemStack(Items.COAL,1,1), new Object[]{Items.COAL});
+				Recipes.addShapelessRecipe(new ItemStack(Items.COAL,1,1), new Object[]{Items.COAL});
 			}
 			if (CraftingHandler.recycleIron){
 				GameRegistry.addSmelting(Items.IRON_AXE, new ItemStack(Items.IRON_INGOT,3), 0.0F);
@@ -181,49 +182,34 @@ public class Crafting {
 			}
 			
 			if (CraftingHandler.realStoneTools){
-				removeRecipe(new ItemStack(Items.STONE_AXE));
-				removeRecipe(new ItemStack(Items.STONE_HOE));
-				removeRecipe(new ItemStack(Items.STONE_SWORD));
-				removeRecipe(new ItemStack(Items.STONE_SHOVEL));
-				removeRecipe(new ItemStack(Items.STONE_PICKAXE));
+				Recipes.removeRecipe(new ItemStack(Items.STONE_AXE));
+				Recipes.removeRecipe(new ItemStack(Items.STONE_HOE));
+				Recipes.removeRecipe(new ItemStack(Items.STONE_SWORD));
+				Recipes.removeRecipe(new ItemStack(Items.STONE_SHOVEL));
+				Recipes.removeRecipe(new ItemStack(Items.STONE_PICKAXE));
 				
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_AXE), "rr", "rs", " s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_AXE), "rr", "sr", "s ", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_HOE), "rr", " s", " s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_HOE), "rr", "s ", "s ", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_SWORD), "r", "r", "s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_SHOVEL), "r", "s", "s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.STONE_PICKAXE), "rrr", " s ", " s ", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK)));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_AXE), "rr", "rs", " s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_AXE), "rr", "sr", "s ", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_HOE), "rr", " s", " s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_HOE), "rr", "s ", "s ", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_SWORD), "r", "r", "s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_SHOVEL), "r", "s", "s", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
+				Recipes.addShapedRecipe(new ItemStack(Items.STONE_PICKAXE), "rrr", " s ", " s ", 'r', new ItemStack(Blocks.STONE), 's', new ItemStack(Items.STICK));
 			}
 			
 			if (CraftingHandler.oldBook){
-				removeRecipe(new ItemStack(Items.BOOK));
-				GameRegistry.addShapedRecipe(new ItemStack(Items.BOOK), new Object[] {"S", "S", "S", 'S', new ItemStack(Items.PAPER)});
+			    Recipes.removeRecipe(new ItemStack(Items.BOOK));
+				Recipes.addShapedRecipe(new ItemStack(Items.BOOK), new Object[] {"S", "S", "S", 'S', new ItemStack(Items.PAPER)});
 			}
 			
 			if (CraftingHandler.oldArrow){
-				removeRecipe(new ItemStack(Items.ARROW));
-				GameRegistry.addShapedRecipe(new ItemStack(Items.ARROW, 4), new Object[] {"F", "S", "I", 'F', new ItemStack(Items.FLINT), 'S', new ItemStack(Items.STICK), 'I', new ItemStack(Items.IRON_INGOT)});
+			    Recipes.removeRecipe(new ItemStack(Items.ARROW));
+				Recipes.addShapedRecipe(new ItemStack(Items.ARROW, 4), new Object[] {"F", "S", "I", 'F', new ItemStack(Items.FLINT), 'S', new ItemStack(Items.STICK), 'I', new ItemStack(Items.IRON_INGOT)});
 			}
 			
 			if (CraftingHandler.oldOakFence){
-				removeRecipe(new ItemStack(Blocks.OAK_FENCE));
-				GameRegistry.addShapedRecipe(new ItemStack(Blocks.OAK_FENCE, 3), new Object[] {"SSS", "SSS", 'S', new ItemStack(Items.STICK)});
-			}
-		}
-	}
-	
-	private static void removeRecipe(ItemStack resultItem){
-		ItemStack recipeResult;
-		ArrayList recipes = (ArrayList) CraftingManager.getInstance().getRecipeList();
-		for(int scan = 0;scan < recipes.size();scan++){
-			IRecipe tmpRecipe = (IRecipe) recipes.get(scan);
-			recipeResult = tmpRecipe.getRecipeOutput();
-			if(recipeResult != null){
-				if(recipeResult.getItem() == resultItem.getItem() && recipeResult.getItemDamage() == resultItem.getItemDamage()){
-					recipes.remove(scan);
-					scan--;
-				}
+			    Recipes.removeRecipe(new ItemStack(Blocks.OAK_FENCE));
+				Recipes.addShapedRecipe(new ItemStack(Blocks.OAK_FENCE, 3), new Object[] {"SSS", "SSS", 'S', new ItemStack(Items.STICK)});
 			}
 		}
 	}

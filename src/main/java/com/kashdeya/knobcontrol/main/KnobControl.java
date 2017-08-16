@@ -1,6 +1,7 @@
 package com.kashdeya.knobcontrol.main;
 
 import java.io.File;
+import java.util.Iterator;
 
 import com.kashdeya.knobcontrol.config.Config;
 import com.kashdeya.knobcontrol.handlers.BedrockHandler;
@@ -24,14 +25,15 @@ import com.kashdeya.knobcontrol.modulars.Uncrafting;
 import com.kashdeya.knobcontrol.proxy.CommonProxy;
 import com.kashdeya.knobcontrol.util.Client;
 import com.kashdeya.knobcontrol.util.PotionShift;
+import com.kashdeya.knobcontrol.util.Recipes;
 import com.kashdeya.knobcontrol.util.Server;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -41,8 +43,10 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 
@@ -157,7 +161,7 @@ public class KnobControl {
     
     @EventHandler
     public void serverStart(FMLServerStartedEvent e){
-    	GameRules game = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers[0].getGameRules();
+    	GameRules game = FMLCommonHandler.instance().getMinecraftServerInstance().worlds[0].getGameRules();
     	
     	if (ServerHandler.keepInvo){
     		game.setOrCreateGameRule("keepInventory", "true");
@@ -182,5 +186,15 @@ public class KnobControl {
 		if (ServerHandler.pvp){
 			game.setOrCreateGameRule("pvp", "false");
 		}
+    }
+    
+    @SubscribeEvent
+    public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+        IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
+        Iterator<ResourceLocation> iterator = Recipes.removeList.iterator();
+
+        while (iterator.hasNext()) {
+            registry.remove(iterator.next());
+        }
     }
 }
