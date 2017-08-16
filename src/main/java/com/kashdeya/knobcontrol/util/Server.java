@@ -57,7 +57,6 @@ import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Server {
 	
@@ -158,7 +157,7 @@ public class Server {
 	public void onLivingAttackEvent(LivingAttackEvent event) {
 		if (ServerHandler.spidersApplySlowness) {
 			HashSet<EntityLivingBase> poisonedEntities = new HashSet<>();
-			if (event.getSource().getDamageType().equals("mob") && event.getSource().getEntity() instanceof EntitySpider) {
+			if (event.getSource().getDamageType().equals("mob") && event.getEntity() instanceof EntitySpider) {
 				if (poisonedEntities.contains(event.getEntityLiving())) {
 					event.getEntityLiving().removePotionEffect(MobEffects.POISON);
 					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, ServerHandler.slownessTicks * 20, ServerHandler.slownessLevel));
@@ -169,7 +168,7 @@ public class Server {
 
 		if (ServerHandler.CaveSpiderPoison) {
 			HashSet<EntityLivingBase> poisonedEntities = new HashSet<>();
-			if (event.getSource().getDamageType().equals("mob") && event.getSource().getEntity() instanceof EntityCaveSpider) {
+			if (event.getSource().getDamageType().equals("mob") && event.getEntity() instanceof EntityCaveSpider) {
 				if (poisonedEntities.contains(event.getEntityLiving())) {
 					event.getEntityLiving().removePotionEffect(MobEffects.POISON);
 					event.getEntityLiving().addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, ServerHandler.weaknessTicks * 20, ServerHandler.weaknessLevel));
@@ -196,7 +195,7 @@ public class Server {
             event.getDrops().add(new ItemStack(Blocks.MELON_BLOCK, 1));
         }
         ItemStack block = new ItemStack(Blocks.MELON_BLOCK, 1);
-        GameRegistry.addShapelessRecipe(new ItemStack(Items.MELON, 4), block);
+        Recipes.addShapelessRecipe(new ItemStack(Items.MELON, 4), block);
 		}
     }
 	
@@ -230,7 +229,7 @@ public class Server {
 	public void onAttacked(LivingAttackEvent event) {
 		if (ServerHandler.safeOff){
 			if(event.getSource() != null) {
-				Entity attacker = event.getSource().getEntity();
+				Entity attacker = event.getEntity();
 				if(attacker != null && attacker.getRidingEntity() == event.getEntity())
 					event.setCanceled(true);
 			}
@@ -296,9 +295,9 @@ public class Server {
 				return;
 			chicken = (EntityChicken) event.getEntity();
 			for (EntityItem item : event.getDrops()) {
-				if (item != null && item.getEntityItem().getItem().equals(Items.FEATHER)) {
+				if (item != null && item.getItem().getItem().equals(Items.FEATHER)) {
 					setFeather = true;
-					item.getEntityItem().setCount(MathHelper.getInt(item.world.rand, 1, 2));
+					item.getItem().setCount(MathHelper.getInt(item.world.rand, 1, 2));
 				}
 			}
 			if (!setFeather) {
@@ -346,7 +345,7 @@ public class Server {
 			EntityZombie zombie = (EntityZombie) event.getEntity();
 
 			if(zombie.world.isDaytime() && !zombie.world.isRemote && zombie.isChild()) {
-				float f = zombie.getBrightness(1.0F);
+				float f = zombie.getBrightness();
 				BlockPos blockpos = zombie.getRidingEntity() instanceof EntityBoat ? new BlockPos(zombie.posX, Math.round(zombie.posY), zombie.posZ).up() : new BlockPos(zombie.posX, Math.round(zombie.posY), zombie.posZ);
 
 				if(f > 0.5F && zombie.world.rand.nextFloat() * 20.0F < (f - 0.4F) * 2.0F && zombie.world.canSeeSky(blockpos)) {
@@ -376,7 +375,7 @@ public class Server {
 			EntityBat bat = (EntityBat) event.getEntity();
 
 			if(bat.world.isDaytime() && !bat.world.isRemote) {
-				float f = bat.getBrightness(1.0F);
+				float f = bat.getBrightness();
 				BlockPos blockpos = new BlockPos(bat.posX, Math.round(bat.posY), bat.posZ);
 
 				if(f > 0.5F && bat.world.rand.nextFloat() * 20.0F < (f - 0.4F) * 2.0F && bat.world.canSeeSky(blockpos)) {
