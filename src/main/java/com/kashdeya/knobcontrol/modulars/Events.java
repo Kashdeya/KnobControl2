@@ -32,7 +32,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.Explosion;
-import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -711,10 +711,10 @@ public class Events {
 	}
 	
 	@SubscribeEvent
-	public void witherSpawn(EntityEvent event)
+	public void witherSpawn(EntityJoinWorldEvent event)
 	{
 		Entity getWither = event.getEntity();
-
+		
 		if (getWither != null && getWither instanceof EntityWither && EventsHandler.witherSpawn)
 		{
 			EntityWither wither = (EntityWither) getWither;
@@ -728,7 +728,7 @@ public class Events {
 					ItemStack soulSand = new ItemStack(Blocks.SOUL_SAND, 3);
 					event.getEntity().entityDropItem(soulSand, 0.0F);
 				}
-				wither.setDead();
+				event.setCanceled(true);
 			}
 		}
 	}
