@@ -5,6 +5,9 @@ import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 import com.kashdeya.knobcontrol.handlers.ServerHandler;
 import com.kashdeya.knobcontrol.util.Recipes;
 
+import com.kashdeya.knobcontrol.handlers.CraftingHandler;
+import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

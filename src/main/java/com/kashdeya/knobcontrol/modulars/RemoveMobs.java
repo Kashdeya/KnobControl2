@@ -24,9 +24,8 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -162,7 +161,7 @@ public class RemoveMobs {
 			else if(event.getEntity() instanceof EntityZombieVillager){
 			    if(RemoveMobsHandler.zombieVillager){
 			        event.setCanceled(true);
-                }
+        }
 			}
 			else if(event.getEntity() instanceof EntityWither && RemoveMobsHandler.wither){
 				event.setCanceled(true);
