@@ -131,8 +131,6 @@ public class KnobControl {
 		
     	// FuelHandler
 		if (ModularsHandler.furnace){
-		    System.err.println("The Vanilla TileEntityFurnace code has been changed to ignore Forge fuel registries if the ItemStack registry name starts with 'minecraft'.");
-		    System.err.println("As a result, the Furnace Modular is broken due to a Vanilla code change and I am unsure how to fix this. ~ArclightTW");
 			GameRegistry.registerFuelHandler(new Furnace());
 		}
 		
