@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -109,13 +108,7 @@ public class MobDrops
 	 */
 	private boolean isPlayerKill(DamageSource source)
 	{
-		if(source.getSourceOfDamage() instanceof EntityArrow)
-		{
-			return ((EntityArrow)source.getSourceOfDamage()).shootingEntity instanceof EntityPlayer; 
-		}else
-		{
-			return source.getEntity() instanceof EntityPlayer;
-		}
+		return source.getTrueSource() instanceof EntityPlayer;
 	}
 	
 	
