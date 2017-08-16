@@ -2,6 +2,7 @@ package com.kashdeya.knobcontrol.modulars;
 
 import com.kashdeya.knobcontrol.handlers.CraftingHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
+import com.kashdeya.knobcontrol.handlers.ServerHandler;
 import com.kashdeya.knobcontrol.util.Recipes;
 
 import net.minecraft.init.Blocks;
@@ -13,7 +14,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class Crafting {
 	
 	public static void registerRecipes(){
-		
+	    if(ServerHandler.melonDrop){
+	        ItemStack block = new ItemStack(Blocks.MELON_BLOCK, 1);
+	        Recipes.addShapelessRecipe(new ItemStack(Items.MELON, 4), block);
+	    }
+	    
 		if (ModularsHandler.crafting){
 			if (CraftingHandler.oldHorse){
 			    Recipes.addShapedRecipe(new ItemStack(Items.IRON_HORSE_ARMOR), new Object[] {"  H", "IWI", "L L", 'W', new ItemStack(Blocks.WOOL), 'I', new ItemStack(Items.IRON_INGOT), 'H', new ItemStack(Items.IRON_HELMET), 'L', new ItemStack(Items.IRON_LEGGINGS)});

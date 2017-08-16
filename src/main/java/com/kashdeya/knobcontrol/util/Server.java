@@ -194,8 +194,6 @@ public class Server {
             event.getDrops().clear();
             event.getDrops().add(new ItemStack(Blocks.MELON_BLOCK, 1));
         }
-        ItemStack block = new ItemStack(Blocks.MELON_BLOCK, 1);
-        Recipes.addShapelessRecipe(new ItemStack(Items.MELON, 4), block);
 		}
     }
 	
