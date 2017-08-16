@@ -5,6 +5,7 @@ import com.kashdeya.knobcontrol.handlers.RemoveDropsHandler;
 
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -23,8 +24,9 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.SkeletonType;
+import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -225,12 +227,12 @@ public class RemoveDrops {
 				}
 			}
 		
-			if ((event.getEntityLiving() instanceof EntitySkeleton)){
-				EntitySkeleton skeleton = (EntitySkeleton)event.getEntity();
-				if(skeleton.getSkeletonType()== SkeletonType.NORMAL && RemoveDropsHandler.skeleton){
+			if ((event.getEntityLiving() instanceof AbstractSkeleton)){
+			    AbstractSkeleton skeleton = (AbstractSkeleton)event.getEntity();
+				if(skeleton instanceof EntitySkeleton && RemoveDropsHandler.skeleton){
 					event.getDrops().removeAll(event.getDrops());
 				}
-				else if (skeleton.getSkeletonType()== SkeletonType.WITHER && RemoveDropsHandler.witherSkeleton){
+				else if (skeleton instanceof EntityWitherSkeleton && RemoveDropsHandler.witherSkeleton){
 					event.getDrops().removeAll(event.getDrops());
 				}
 			}
@@ -259,14 +261,16 @@ public class RemoveDrops {
 				}
 			}
 		
-			if ((event.getEntityLiving() instanceof EntityZombie)){
-				EntityZombie zombie = (EntityZombie)event.getEntity();
-				if(zombie.isVillager() && RemoveDropsHandler.villagerZombie){
-					event.getDrops().removeAll(event.getDrops());
-				}
-				else if (RemoveDropsHandler.zombie){
-					event.getDrops().removeAll(event.getDrops());
-				}
+			if(RemoveDropsHandler.zombie){
+			    if((event.getEntityLiving() instanceof EntityZombie && !(event.getEntityLiving() instanceof EntityZombieVillager))){
+			        event.getDrops().removeAll(event.getDrops());
+			    }
+			}
+			
+			if(RemoveDropsHandler.villagerZombie){
+			    if((event.getEntityLiving() instanceof EntityZombieVillager)){
+			        event.getDrops().removeAll(event.getDrops());
+			    }
 			}
 		}
 	}
