@@ -21,8 +21,8 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -139,17 +139,15 @@ public class LightLevels {
 			}
 			
 			if (event.getEntityLiving() instanceof EntitySkeleton && LightLevelHandler.Skeleton) {
-				EntitySkeleton skeleton = (EntitySkeleton)event.getEntity();
 				int blockLight = event.getWorld().getLightFor(EnumSkyBlock.BLOCK, new BlockPos(event.getX(), event.getY(), event.getZ()));
-				if (skeleton.getSkeletonType()== SkeletonType.NORMAL && blockLight > LightLevelHandler.EntitySkeleton) {
+				if (blockLight > LightLevelHandler.EntitySkeleton) {
 					event.setResult(Result.DENY);
 				}
 			}
 			
-			if (event.getEntityLiving() instanceof EntitySkeleton && LightLevelHandler.WitherSkeleton) {
-				EntitySkeleton skeleton = (EntitySkeleton)event.getEntity();
+			if (event.getEntityLiving() instanceof EntityWitherSkeleton && LightLevelHandler.WitherSkeleton) {
 				int blockLight = event.getWorld().getLightFor(EnumSkyBlock.BLOCK, new BlockPos(event.getX(), event.getY(), event.getZ()));
-				if (skeleton.getSkeletonType()== SkeletonType.WITHER && blockLight > LightLevelHandler.EntityWitherSkeleton) {
+				if (blockLight > LightLevelHandler.EntityWitherSkeleton) {
 					event.setResult(Result.DENY);
 				}
 			}

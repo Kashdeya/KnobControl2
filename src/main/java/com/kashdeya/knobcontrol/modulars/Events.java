@@ -32,7 +32,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.Explosion;
-import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -45,7 +45,7 @@ public class Events {
 	  @SubscribeEvent
 	  public void AttackEntity(AttackEntityEvent event){
 		  if (ModularsHandler.events){
-			  if ((!event.getTarget().worldObj.isRemote) && (!event.getEntityPlayer().capabilities.isCreativeMode)){
+			  if ((!event.getTarget().world.isRemote) && (!event.getEntityPlayer().capabilities.isCreativeMode)){
 			      if (((event.getTarget() instanceof EntityCreeper)) && ((EventsHandler.Creepers_Boom) || (EventsHandler.Creepers_Potions))){
 			    	  isCreeper(event.getTarget(), event.getEntityPlayer());}
 			      else if (((event.getTarget() instanceof EntitySpider)) && (EventsHandler.Spiders)){
@@ -500,7 +500,7 @@ public class Events {
 	      }
 	      catch (Exception e)
 	      {
-	        Explosion explosion = new Explosion(creeper.worldObj, null, creeper.posX, creeper.posY, creeper.posZ, 3.0F, false, true);
+	        Explosion explosion = new Explosion(creeper.world, null, creeper.posX, creeper.posY, creeper.posZ, 3.0F, false, true);
 	        explosion.doExplosionA();
 	        explosion.doExplosionB(true);
 	        
@@ -705,22 +705,22 @@ public class Events {
 		if (event.getEntity() instanceof EntityEnderman && EventsHandler.extraDropsEnderman)
 		{
 			ItemStack dropStack = new ItemStack(Items.ENDER_PEARL, 1 + random.nextInt(EventsHandler.endermanDrops));
-			EntityItem dropEntity = new EntityItem(event.getEntity().worldObj, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, dropStack);
+			EntityItem dropEntity = new EntityItem(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, dropStack);
 			event.getDrops().add(dropEntity);
 		}
 	}
 	
 	@SubscribeEvent
-	public void witherSpawn(EntityEvent event)
+	public void witherSpawn(EntityJoinWorldEvent event)
 	{
 		Entity getWither = event.getEntity();
-
+		
 		if (getWither != null && getWither instanceof EntityWither && EventsHandler.witherSpawn)
 		{
 			EntityWither wither = (EntityWither) getWither;
-			if (wither.worldObj.provider.getDimension() == 0)
+			if (wither.world.provider.getDimension() == 0)
 			{
-				if (!event.getEntity().worldObj.isRemote)
+				if (!event.getEntity().world.isRemote)
 				{
 					ItemStack skulls = new ItemStack(Items.SKULL, 3, 1);
 					event.getEntity().entityDropItem(skulls, 0.0F);
@@ -728,7 +728,7 @@ public class Events {
 					ItemStack soulSand = new ItemStack(Blocks.SOUL_SAND, 3);
 					event.getEntity().entityDropItem(soulSand, 0.0F);
 				}
-				wither.setDead();
+				event.setCanceled(true);
 			}
 		}
 	}

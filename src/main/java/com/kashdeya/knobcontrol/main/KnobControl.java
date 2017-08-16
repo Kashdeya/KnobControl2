@@ -26,9 +26,6 @@ import com.kashdeya.knobcontrol.util.Client;
 import com.kashdeya.knobcontrol.util.PotionShift;
 import com.kashdeya.knobcontrol.util.Server;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.world.GameRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -134,6 +131,8 @@ public class KnobControl {
 		
     	// FuelHandler
 		if (ModularsHandler.furnace){
+		    System.err.println("The Vanilla TileEntityFurnace code has been changed to ignore Forge fuel registries if the ItemStack registry name starts with 'minecraft'.");
+		    System.err.println("As a result, the Furnace Modular is broken due to a Vanilla code change and I am unsure how to fix this. ~ArclightTW");
 			GameRegistry.registerFuelHandler(new Furnace());
 		}
 		
@@ -157,7 +156,7 @@ public class KnobControl {
     
     @EventHandler
     public void serverStart(FMLServerStartedEvent e){
-    	GameRules game = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers[0].getGameRules();
+    	GameRules game = FMLCommonHandler.instance().getMinecraftServerInstance().worlds[0].getGameRules();
     	
     	if (ServerHandler.keepInvo){
     		game.setOrCreateGameRule("keepInventory", "true");
