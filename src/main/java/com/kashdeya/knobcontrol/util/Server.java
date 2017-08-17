@@ -11,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityBoat;
@@ -23,7 +22,6 @@ import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityVillager;
@@ -123,7 +121,7 @@ public class Server {
 		    	}
 		    }
 			if (ServerHandler.inWall){
-		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.inWall))) {
+		    	if ((event.getEntityLiving().equals(player)) && (event.getSource().equals(DamageSource.IN_WALL))) {
 		    		event.setAmount(0.0F);
 		    	}
 		    }
@@ -148,7 +146,7 @@ public class Server {
 				EntityPlayer entityPlayer = event.getEntityPlayer();
 				entityPlayer.setSpawnPoint(event.getPos(), false);
 				entityPlayer.setSpawnChunk(event.getPos(), false, event.getEntityPlayer().dimension);
-				entityPlayer.addChatComponentMessage(new TextComponentTranslation("Spawn has been Set!"));
+				entityPlayer.sendMessage(new TextComponentTranslation("Spawn has been Set!"));
 			}
 		}
 	}
@@ -218,7 +216,7 @@ public class Server {
     				Block attached = event.getWorld().getBlockState(posOffset).getBlock();
     				
     				if (!attached.isAir(state, event.getWorld(), posOffset)) {
-    					attached.onBlockActivated(event.getWorld(), posOffset, event.getWorld().getBlockState(posOffset), event.getEntityPlayer(), event.getHand(), held, event.getFace(), 0, 0, 0);
+    					attached.onBlockActivated(event.getWorld(), posOffset, event.getWorld().getBlockState(posOffset), event.getEntityPlayer(), event.getHand(), event.getFace(), 0, 0, 0);
     				}
                 }
             }
@@ -321,7 +319,7 @@ public class Server {
 	public void PlayerHurt(LivingHurtEvent event){
 		if ((event.getEntityLiving() instanceof EntityPlayer) && (ServerHandler.ReducePoison)){
 			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-			if ((player.isPotionActive(Potion.getPotionById(19))) && (event.getSource().damageType == DamageSource.magic.getDamageType())) {
+			if ((player.isPotionActive(Potion.getPotionById(19))) && (event.getSource().damageType == DamageSource.MAGIC.getDamageType())) {
 				event.setAmount(ServerHandler.DmgDecrease);
 				}
 			}
