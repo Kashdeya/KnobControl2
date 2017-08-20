@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 
 import com.kashdeya.knobcontrol.config.Config;
+import com.kashdeya.knobcontrol.crafting.RecipeRegistry;
 import com.kashdeya.knobcontrol.handlers.BedrockHandler;
 import com.kashdeya.knobcontrol.handlers.ClientHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
@@ -25,7 +26,6 @@ import com.kashdeya.knobcontrol.modulars.Uncrafting;
 import com.kashdeya.knobcontrol.proxy.CommonProxy;
 import com.kashdeya.knobcontrol.util.Client;
 import com.kashdeya.knobcontrol.util.PotionShift;
-import com.kashdeya.knobcontrol.util.Recipes;
 import com.kashdeya.knobcontrol.util.Server;
 
 import net.minecraft.item.crafting.IRecipe;
@@ -191,7 +191,7 @@ public class KnobControl {
     @SubscribeEvent
     public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
-        Iterator<ResourceLocation> iterator = Recipes.removeList.iterator();
+        Iterator<ResourceLocation> iterator = RecipeRegistry.removeList.iterator();
 
         while (iterator.hasNext()) {
             registry.remove(iterator.next());
