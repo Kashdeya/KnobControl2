@@ -1,4 +1,4 @@
-package com.kashdeya.knobcontrol.util;
+package com.kashdeya.knobcontrol.crafting;
 
 import java.util.List;
 import java.util.Set;
@@ -14,16 +14,50 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class Recipes
+public class RecipeRegistry
 {
-    public static Set<ResourceLocation> removeList = Sets.newHashSet();
-    
     public static void addShapedRecipe(ItemStack output, Object... inputs)
     {
-        GameRegistry.addShapedRecipe(output.getItem().getRegistryName(), output.getItem().getRegistryName(), output, inputs);
+        int recipeIndex = 0;
+        ResourceLocation name = output.getItem().getRegistryName();
+        
+        while(CraftingManager.REGISTRY.containsKey(name))
+        {
+            name = new ResourceLocation(name.getResourceDomain(), String.format("%s.%d", name.getResourcePath(), recipeIndex++));
+        }
+        
+        addShapedRecipe(name.toString(), output, inputs);
+    }
+    
+    public static void addShapedRecipe(String name, ItemStack output, Object... inputs)
+    {
+        addShapedRecipe(name, name, output, inputs);
+    }
+    
+    public static void addShapedRecipe(String name, String group, ItemStack output, Object... inputs)
+    {
+        GameRegistry.addShapedRecipe(new ResourceLocation(name), new ResourceLocation(group), output, inputs);
     }
     
     public static void addShapelessRecipe(ItemStack output, Object... inputs)
+    {
+        int recipeIndex = 0;
+        ResourceLocation name = output.getItem().getRegistryName();
+        
+        while(CraftingManager.REGISTRY.containsKey(name))
+        {
+            name = new ResourceLocation(name.getResourceDomain(), String.format("%s.%d", name.getResourcePath(), recipeIndex++));
+        }
+        
+        addShapelessRecipe(name.toString(), output, inputs);
+    }
+    
+    public static void addShapelessRecipe(String name, ItemStack output, Object... inputs)
+    {
+        addShapelessRecipe(name, name, output, inputs);
+    }
+    
+    public static void addShapelessRecipe(String name, String group, ItemStack output, Object... inputs)
     {
         Ingredient[] ingredients = new Ingredient[inputs.length];
         
@@ -59,8 +93,10 @@ public class Recipes
             }
         }
         
-        GameRegistry.addShapelessRecipe(output.getItem().getRegistryName(), output.getItem().getRegistryName(), output, ingredients);
+        GameRegistry.addShapelessRecipe(new ResourceLocation(name), new ResourceLocation(group), output, ingredients);
     }
+    
+    public static Set<ResourceLocation> removeList = Sets.newHashSet();
     
     public static void removeRecipe(ItemStack resultItem){
         CraftingManager.REGISTRY.forEach((recipe) -> {
