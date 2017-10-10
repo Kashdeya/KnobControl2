@@ -7,6 +7,7 @@ import com.kashdeya.knobcontrol.config.Config;
 import com.kashdeya.knobcontrol.crafting.RecipeRegistry;
 import com.kashdeya.knobcontrol.handlers.BedrockHandler;
 import com.kashdeya.knobcontrol.handlers.ClientHandler;
+import com.kashdeya.knobcontrol.handlers.EventsHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 import com.kashdeya.knobcontrol.handlers.ServerHandler;
 import com.kashdeya.knobcontrol.modulars.Crafting;
@@ -24,10 +25,13 @@ import com.kashdeya.knobcontrol.modulars.RemoveMobs;
 import com.kashdeya.knobcontrol.modulars.TerrainControl;
 import com.kashdeya.knobcontrol.modulars.Uncrafting;
 import com.kashdeya.knobcontrol.proxy.CommonProxy;
+import com.kashdeya.knobcontrol.util.BlockRegistry;
 import com.kashdeya.knobcontrol.util.Client;
 import com.kashdeya.knobcontrol.util.PotionShift;
 import com.kashdeya.knobcontrol.util.Server;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.tutorial.TutorialSteps;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.GameRules;
@@ -112,6 +116,10 @@ public class KnobControl {
 		if (ModularsHandler.itemStacks){
 			ItemStacks.registerTweaks();
 		}
+		if (EventsHandler.noPortal){
+			BlockRegistry.initBlockRegistry();
+			MinecraftForge.EVENT_BUS.register(new BlockRegistry());
+		}
 		
 		// Server Only
 		MinecraftForge.EVENT_BUS.register(new Server());
@@ -157,6 +165,10 @@ public class KnobControl {
     public void postInit(FMLPostInitializationEvent e) 
     {
 			MobDrops.generateConfigFile(new Configuration(new File(configDir, "Mob Drops Modular.cfg")));
+			
+			if (ClientHandler.tutStuff){
+			Minecraft.getMinecraft().getTutorial().setStep(TutorialSteps.NONE);
+			}
     }
     
     @EventHandler

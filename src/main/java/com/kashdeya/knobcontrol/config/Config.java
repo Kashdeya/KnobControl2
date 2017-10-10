@@ -63,6 +63,7 @@ public class Config {
         ClientHandler.fovOff = config.getBoolean("Field of View", category + " Client Options", false, "Stop FOV from changing due to potions and flight?");
         ClientHandler.potionOff = config.getBoolean("Potion Icons", category + " Client Options", false, "Remove Potion Icons from top right of Screen?");
         ClientHandler.potionShift = config.getBoolean("Potion Shift", category + " Client Options", false, "Stop Inventory screen from shifting if potion effect is displayed?");
+        ClientHandler.tutStuff = config.getBoolean("Tutorial Steps", category + " Client Options", false, "Stop the Tutorial Steps from popping up");
         
         // Server Side Changes
         config.addCustomCategoryComment(category + " Misc Options", "true or false");
@@ -70,6 +71,7 @@ public class Config {
         ServerHandler.melonDrop = config.getBoolean("Melon Drops", category + " Misc Options", false, "Melons drop full Melons instead of slices?");
         ServerHandler.passThrough = config.getBoolean("Pass Through Signs", category + " Misc Options", false, "Enable Player to pass through a sign?");
         ServerHandler.safeOff = config.getBoolean("Safe Mobs", category + " Misc Options", false, "Stop the Mobs you are riding from getting hurt from your weapon.");
+        EventsHandler.noPortal = config.getBoolean("Disable Nether Portal", category + " Misc Options", false, "Stop the creation of the nether portal.");
         
         // GameRules
         config.addCustomCategoryComment(category + " GameRules", "true or false");

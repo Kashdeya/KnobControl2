@@ -18,4 +18,7 @@ public class ClientHandler {
 	
 	// netherrack
 	public static boolean netherRack = false;
+	
+	// Tut Stuff
+	public static boolean tutStuff = false;
 }

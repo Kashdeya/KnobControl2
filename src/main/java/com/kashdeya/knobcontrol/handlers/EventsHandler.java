@@ -2,6 +2,9 @@ package com.kashdeya.knobcontrol.handlers;
 
 public class EventsHandler {
 	
+	// No Portal
+	public static boolean noPortal = false;
+	
 	// Wither Spawn
 	public static boolean witherSpawn = false;
 	
