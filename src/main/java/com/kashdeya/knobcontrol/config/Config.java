@@ -72,6 +72,7 @@ public class Config {
         ServerHandler.passThrough = config.getBoolean("Pass Through Signs", category + " Misc Options", false, "Enable Player to pass through a sign?");
         ServerHandler.safeOff = config.getBoolean("Safe Mobs", category + " Misc Options", false, "Stop the Mobs you are riding from getting hurt from your weapon.");
         EventsHandler.noPortal = config.getBoolean("Disable Nether Portal", category + " Misc Options", false, "Stop the creation of the nether portal.");
+        ClientHandler.disableCheats = config.getBoolean("Disable Cheats", category + " Misc Options", false, "Stop players from using Cheats.");
         
         // GameRules
         config.addCustomCategoryComment(category + " GameRules", "true or false");
