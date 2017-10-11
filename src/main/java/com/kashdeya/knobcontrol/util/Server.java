@@ -22,6 +22,7 @@ import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityVillager;
@@ -41,6 +42,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -486,4 +488,18 @@ public class Server {
     		event.getWorld().getWorldInfo().setAllowCommands(false);
 		}
 	}
+    
+    @SubscribeEvent
+    public void onSpawnCheck(EntityJoinWorldEvent event){
+    	if (event.getEntity() instanceof EntityLivingBase) 
+		{
+			EntityLivingBase entity = (EntityLivingBase) event.getEntity();
+			
+			if(event.getEntity() instanceof EntityAnimal)
+			{
+				((EntityAnimal)event.getEntity()).targetTasks.addTask(1, new EntityAnimalAI.AIHurtByAggressor(this));
+				((EntityAnimal)event.getEntity()).targetTasks.addTask(2, new EntityAnimalAI.AITargetAggressor(this));
+			}
+		}
+    }
 }
