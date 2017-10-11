@@ -2,6 +2,12 @@ package com.kashdeya.knobcontrol.handlers;
 
 public class ServerHandler {
 	
+	// Allow Chest
+	public static boolean disableCheats = false;
+	
+	// No Portal
+	public static boolean noPortal = true;
+	
 	// Netherrack Burn
 	public static boolean netherrackBurn = false;
 	public static int burnTime = 2;

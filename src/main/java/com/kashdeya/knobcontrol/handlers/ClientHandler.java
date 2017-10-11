@@ -21,7 +21,4 @@ public class ClientHandler {
 	
 	// Tut Stuff
 	public static boolean tutStuff = false;
-	
-	// Allow Chest
-	public static boolean disableCheats = false;
 }

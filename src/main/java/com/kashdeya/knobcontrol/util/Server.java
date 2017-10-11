@@ -53,6 +53,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -478,4 +479,11 @@ public class Server {
         	event.setCanceled(true);
         }
     }
+    
+    @SubscribeEvent
+	public void onWorldLoad(WorldEvent.Load event){
+    	if (ServerHandler.disableCheats){
+    		event.getWorld().getWorldInfo().setAllowCommands(false);
+		}
+	}
 }

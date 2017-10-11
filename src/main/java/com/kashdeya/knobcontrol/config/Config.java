@@ -71,8 +71,8 @@ public class Config {
         ServerHandler.melonDrop = config.getBoolean("Melon Drops", category + " Misc Options", false, "Melons drop full Melons instead of slices?");
         ServerHandler.passThrough = config.getBoolean("Pass Through Signs", category + " Misc Options", false, "Enable Player to pass through a sign?");
         ServerHandler.safeOff = config.getBoolean("Safe Mobs", category + " Misc Options", false, "Stop the Mobs you are riding from getting hurt from your weapon.");
-        EventsHandler.noPortal = config.getBoolean("Disable Nether Portal", category + " Misc Options", false, "Stop the creation of the nether portal.");
-        ClientHandler.disableCheats = config.getBoolean("Disable Cheats", category + " Misc Options", false, "Stop players from using Cheats.");
+        ServerHandler.noPortal = config.getBoolean("Disable Nether Portal", category + " Misc Options", false, "Stop the creation of the nether portal.");
+        ServerHandler.disableCheats = config.getBoolean("Disable Cheats", category + " Misc Options", false, "Stop players from using Cheats.");
         
         // GameRules
         config.addCustomCategoryComment(category + " GameRules", "true or false");
@@ -133,8 +133,8 @@ public class Config {
         
         // Skeletons Sink
         config.addCustomCategoryComment(category + " MISC Mob Options", "true or false");
-        ServerHandler.SkeletonNoSwim = config.getBoolean("No Swim", category + "  MISC Mob Options", false, "Disable Skeleton Swim?");
-        ServerHandler.stopEnderman = config.getBoolean("No Enderman", category + "  MISC Mob Options", false, "Disable Enderman Teleporting?");
+        ServerHandler.SkeletonNoSwim = config.getBoolean("No Swim", category + " MISC Mob Options", false, "Disable Skeleton Swim?");
+        ServerHandler.stopEnderman = config.getBoolean("No Enderman", category + " MISC Mob Options", false, "Disable Enderman Teleporting?");
         
 		if (config.hasChanged() == true){
         config.save();

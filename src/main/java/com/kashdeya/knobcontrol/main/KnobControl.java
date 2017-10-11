@@ -7,7 +7,6 @@ import com.kashdeya.knobcontrol.config.Config;
 import com.kashdeya.knobcontrol.crafting.RecipeRegistry;
 import com.kashdeya.knobcontrol.handlers.BedrockHandler;
 import com.kashdeya.knobcontrol.handlers.ClientHandler;
-import com.kashdeya.knobcontrol.handlers.EventsHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 import com.kashdeya.knobcontrol.handlers.ServerHandler;
 import com.kashdeya.knobcontrol.modulars.Crafting;
@@ -116,7 +115,7 @@ public class KnobControl {
 		if (ModularsHandler.itemStacks){
 			ItemStacks.registerTweaks();
 		}
-		if (EventsHandler.noPortal){
+		if (ServerHandler.noPortal){
 			BlockRegistry.initBlockRegistry();
 			MinecraftForge.EVENT_BUS.register(new BlockRegistry());
 		}

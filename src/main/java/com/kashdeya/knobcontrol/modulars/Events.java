@@ -3,7 +3,6 @@ package com.kashdeya.knobcontrol.modulars;
 import java.lang.reflect.Method;
 import java.util.Random;
 
-import com.kashdeya.knobcontrol.handlers.ClientHandler;
 import com.kashdeya.knobcontrol.handlers.EventsHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 
@@ -37,19 +36,11 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Events {
 	
 	  Random generator = new Random();
-	  
-	  @SubscribeEvent
-	  public void onWorldLoad(WorldEvent.Load event){
-		  if (ClientHandler.disableCheats){
-			  event.getWorld().getWorldInfo().setAllowCommands(false);
-		  }
-	  }
 	  
 	  @SubscribeEvent
 	  public void AttackEntity(AttackEntityEvent event){
@@ -753,7 +744,7 @@ public class Events {
 	
 	@SubscribeEvent
 	public void explosion(ExplosionEvent.Detonate event) {
-		if (EventsHandler.creeperDamage){
+		if (EventsHandler.creeperDamage) {
 			if (event.getExplosion().getExplosivePlacedBy() instanceof EntityCreeper) {
 				event.getAffectedBlocks().clear();
 			}
