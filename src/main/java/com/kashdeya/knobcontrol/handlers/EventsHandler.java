@@ -397,5 +397,10 @@ public class EventsHandler {
 	public static int zombieWither;
 	public static boolean zombiePlayerUnluck = false;
 	public static int zombieUnluck;
-
+	
+	// AI
+	public static float mob_attack_damage = 2F;
+	public static boolean call_for_help = false;
+	public static boolean mob_calls_for_help = false;
+	public static boolean mob_use_long_memory = false;
 }

@@ -136,6 +136,13 @@ public class Config {
         ServerHandler.SkeletonNoSwim = config.getBoolean("No Swim", category + " MISC Mob Options", false, "Disable Skeleton Swim?");
         ServerHandler.stopEnderman = config.getBoolean("No Enderman", category + " MISC Mob Options", false, "Disable Enderman Teleporting?");
         
+        // AI
+        config.addCustomCategoryComment(category + " Passive Mob AI", "Blame Jordan Kappa");
+        EventsHandler.call_for_help = config.getBoolean("Enable Passive Mob AI", category + " Passive Mob AI", false, "Enable Agressive Passive Mobs?");
+        EventsHandler.mob_use_long_memory = config.getBoolean("Passive Mob Long Term Memory", category + " Passive Mob AI", false, "Enable Long Term Memory?");
+        EventsHandler.mob_calls_for_help = config.getBoolean("Passive Mob Call for Help", category + " Passive Mob AI", false, "Enable Call for Help?");
+        EventsHandler.mob_attack_damage = config.getFloat("Passive Mob Attack Damage", category + " Passive Mob AI", 2F, 1F, 10F, "Sets Attack Damage");
+        
 		if (config.hasChanged() == true){
         config.save();
         }

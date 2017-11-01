@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import com.kashdeya.knobcontrol.handlers.EventsHandler;
 import com.kashdeya.knobcontrol.handlers.ModularsHandler;
 import com.kashdeya.knobcontrol.handlers.ServerHandler;
 
@@ -12,7 +13,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -22,7 +29,7 @@ import net.minecraft.entity.monster.EntityShulker;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityVillager;
@@ -38,6 +45,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -489,17 +497,45 @@ public class Server {
 		}
 	}
     
-    @SubscribeEvent
-    public void onSpawnCheck(EntityJoinWorldEvent event){
-    	if (event.getEntity() instanceof EntityLivingBase) 
-		{
-			EntityLivingBase entity = (EntityLivingBase) event.getEntity();
-			
-			if(event.getEntity() instanceof EntityAnimal)
-			{
-				((EntityAnimal)event.getEntity()).targetTasks.addTask(1, new EntityAnimalAI.AIHurtByAggressor(this));
-				((EntityAnimal)event.getEntity()).targetTasks.addTask(2, new EntityAnimalAI.AITargetAggressor(this));
+	@SubscribeEvent
+	public void onEntityJoinedWorld(EntityJoinWorldEvent event) {
+		if (event.getEntity() instanceof EntityCreature && event.getEntity().isNonBoss() && !(event.getEntity() instanceof IMob)) {
+			EntityCreature entity = (EntityCreature) event.getEntity();
+			World world = entity.getEntityWorld();
+			if (!world.isRemote && EventsHandler.call_for_help)
+				setUpAI(entity);
+		}
+	}
+    
+	public void setUpAI(EntityCreature entity) {
+		 for (Object taskObject : entity.tasks.taskEntries.toArray()) {
+			 EntityAIBase ai = ((EntityAITaskEntry) taskObject).action;
+			 if (ai instanceof EntityAIPanic)
+				 entity.tasks.removeTask(ai);
+			 }
+				entity.tasks.addTask(1, new AIPassiveMobAttack(entity, 1.25D, EventsHandler.mob_use_long_memory));
+				entity.targetTasks.addTask(1, new EntityAIHurtByTarget(entity, EventsHandler.mob_calls_for_help));
+	}
+
+	static class AIPassiveMobAttack extends EntityAIAttackMelee {
+		public AIPassiveMobAttack(EntityCreature entity, double moveSpeed, boolean longMemory) {
+			super(entity, moveSpeed, longMemory);
+		}
+
+		@Override
+		protected void checkAndPerformAttack(EntityLivingBase entity, double distanceIn) {
+			double reach = this.getAttackReachSqr(entity);
+			if (distanceIn <= reach && this.attackTick <= 0) {
+				attackTick = 20;
+				attacker.swingArm(EnumHand.MAIN_HAND);
+
+				// This overrides the vanilla method with out needing to fuck about with entities
+					attackEntityAsMob(attacker, entity); // Use our damage value attack below
 			}
 		}
-    }
+
+		public boolean attackEntityAsMob(EntityCreature entityAttacker, Entity entityIn) {
+			return entityIn.attackEntityFrom(DamageSource.causeMobDamage(entityAttacker), EventsHandler.mob_attack_damage);
+		}
+	}
 }
