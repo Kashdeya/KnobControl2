@@ -53,7 +53,7 @@ public class Config {
 		ModularsHandler.removeMobs = config.getBoolean("Remove Mobs Modular",  category + " 1:Modulars", false, "Enable Remove Mobs Modular Config?");
 		ModularsHandler.terrainControl = config.getBoolean("Terrain Control Modular",  category + " 1:Modulars", false, "Enable Terrain Control Modular Config?");
 		ModularsHandler.uncrafting = config.getBoolean("Uncrafting Modular",  category + " 1:Modulars", false, "Enable Uncrafting Modular Config?");
-		ModularsHandler.lightLevels = config.getBoolean("Mob Light Levels",  category + " 1:Modulars", false, "Enable Light Level Modular Config?");
+		ModularsHandler.lightLevels = config.getBoolean("Light Levels Modular",  category + " 1:Modulars", false, "Enable Light Level Modular Config?");
 		ModularsHandler.mobDrops = config.getBoolean("Mob Drops",  category + " 1:Modulars", false, "Enable Mob Drops Modular Config?");
 		
         // Client Side Changes
