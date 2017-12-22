@@ -166,7 +166,7 @@ public class KnobControl {
     {
 			MobDrops.generateConfigFile(new Configuration(new File(configDir, "Mob Drops Modular.cfg")));
 			
-			if (ClientHandler.tutStuff){
+			if (e.getSide() == Side.CLIENT && ClientHandler.tutStuff){
 				Minecraft.getMinecraft().getTutorial().setStep(TutorialSteps.NONE);
 			}
 			
